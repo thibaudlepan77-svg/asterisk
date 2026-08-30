@@ -7,6 +7,7 @@ each one is pinned here to stop it coming back.
 import contextlib
 import io
 import os
+import re
 import sys
 import unittest
 
@@ -679,6 +680,32 @@ class ModelComparison(unittest.TestCase):
         self.assertNotIn("NOTHING", text)
 
 
+class TheReadmeCountsHonestly(unittest.TestCase):
+    """The README has advertised a stale test count twice.
+
+    Both times it was written from memory and both times it undercounted, which
+    is the flattering direction. Nothing in the repository could notice, because
+    a number in prose is not checked by anything. So this checks it.
+
+    It compares the count in the quick start against the tests this file
+    actually defines. When it fails, the fix is one of two things, run the suite
+    and copy the real number, or stop advertising a number at all.
+    """
+
+    def test_the_advertised_count_matches_the_suite(self):
+        here = os.path.dirname(os.path.abspath(__file__))
+        with io.open(os.path.join(here, "README.md"), encoding="utf-8") as f:
+            readme = f.read()
+        claimed = re.search(r"python tests_asterisk\.py\s*#\s*(\d+) tests", readme)
+        self.assertIsNotNone(claimed, "the quick start no longer advertises a count")
+        loader = unittest.TestLoader()
+        actual = loader.loadTestsFromModule(sys.modules[__name__]).countTestCases()
+        self.assertEqual(int(claimed.group(1)), actual,
+                         "README says %s tests, the suite defines %d"
+                         % (claimed.group(1), actual))
+
+
 if __name__ == "__main__":
+
 
     unittest.main(verbosity=2)
