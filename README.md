@@ -345,7 +345,10 @@ it, and nobody keeps such notes.
 python cli.py --offline --watch https://example.com/offer
 ```
 
-The first run stores a snapshot. Every run after that reports what moved.
+The first run stores a snapshot. Every run after that reports what moved. The
+block below is an **example of the output shape**, written by hand rather than
+captured, and it is labelled as such because this repository is a tool about
+claims a page does not back up.
 
 ```
 WHAT CHANGED, an offer is a moving thing

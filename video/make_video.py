@@ -146,6 +146,24 @@ prize_is_not_cash  no positive case in this set.
      "were never written against, it finds every restricted one and raises no false alarm on "
      "the rest. The tables and the script that prints them are in the repository."),
 
+    ("watching",
+     """<div class="kicker">an offer is a moving thing</div>
+        <h1>10 &rarr; 1, in thirty five minutes.</h1>
+        <p>One contest's published count of cash prizes changed that morning.
+        Its prize page did not. Nobody was told.</p>
+        <pre><span class="dim">example output, not a captured run</span>
+WHAT CHANGED, an offer is a moving thing
+Compared with the snapshot taken 2026-08-30 07:31:02, 3 stored.
+  <span class="warn">APPEARED</span>     Subscriptions renew automatically unless cancelled
+  <span class="warn">REWORDED</span>     91 % the same
+               was  paid <span class="ok">within 30 days</span> of the announcement
+               now  paid <span class="warn">within 90 days</span> of the announcement</pre>""",
+     "And an offer is a moving thing. One contest's published count of cash prizes went from "
+     "ten to one in thirty five minutes that same morning. Its prize page had not changed, and "
+     "nobody was told. So it keeps a snapshot, and every run after that reports what moved. A "
+     "rewording is matched, because thirty days becoming ninety is one event, and it is the "
+     "interesting one."),
+
     ("the limit",
      """<div class="kicker">the limit I will not hide</div>
         <h1>Silence and a clean bill<br>look identical.</h1>
