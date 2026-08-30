@@ -172,6 +172,41 @@ none of the forty finished ones drawn across the platform's whole history do.
 That looks like a recent practice. With three cases it is a hypothesis, not a
 finding, and it is written here as one.
 
+### Off its home ground, ten ordinary consumer offers
+
+Everything above is contest pages. The README claimed the method generalises,
+so the claim was tested rather than repeated. Ten public pricing and offer
+pages from music, storage, hosting, VPN, banking, email, design, video, code
+hosting and commerce. No labels, so this is a read of what the tool says and
+whether a human agrees, not a score.
+
+What it found, and these are real.
+
+| offer | quoted back at it |
+|---|---|
+| music subscription | `Try 3 months of Premium Individual for $0, then $12.99/month.` |
+| online bank, against a no fee claim | `A fee of 2% (or minimum fee £1) applies per transaction after your rolling monthly limit` |
+| commerce platform | `After your trial, most plans start at just $1 per month for the first 3 months, then switch to standard monthly pricing.` |
+| email, against unlimited | `The Proton Mail Free plan comes with 500 MB of Mail storage` |
+| commerce, against unlimited | `Import unlimited orders from marketplaces 50 synced marketplace orders per month` |
+
+What it got wrong on the first pass, and what changed.
+
+- It paired an **instant setup** promise with a **thirty day refund window**.
+  Both say a number of days and mean opposite things. Weak rules now require
+  the two sentences to share a subject word, and refund windows became their
+  own category with their own wording.
+- It read `billed monthly` off a **pricing toggle** and called it a charge
+  disclosure. Dropped.
+- It matched `in credits` inside **Built-in credits** and paired a plan price
+  with a feature bullet. The phrase now needs a verb of payment in front of it.
+
+And what it still cannot do. **Two of the ten pages render their prices in the
+browser**, so a plain fetch sees one line of text and the tool correctly finds
+nothing in nothing. It does not know the difference between a page with no
+catch and a page it could not read, and that is the most dangerous gap left in
+it. A browser fetch would close it and has not been added.
+
 ---
 
 ## The agent, and the failure that shaped it

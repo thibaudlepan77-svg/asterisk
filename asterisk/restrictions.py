@@ -59,8 +59,15 @@ RESTRICTIONS = [
     ("no refund",
      r"(non[- ]refundable|no refunds?\b|all sales are final)",
      "high", "You cannot get your money back."),
+    # Split in two after a mislabel. A refund window and a payment delay both
+    # say "within N days" and mean opposite things to the reader.
+    ("refund window",
+     r"(within \d+ days of (?:purchase|buying|delivery|the order)|"
+     r"\d+[- ]day money[- ]back)",
+     "low", "There is a deadline to ask for your money back."),
     ("delay before payment",
-     r"(within \d+ (?:business )?days of|delivered within \d+ days|allow \d+ to \d+ (?:business )?days)",
+     r"(delivered within \d+ days|payment (?:will be )?(?:made|sent) within \d+|"
+     r"allow \d+ to \d+ (?:business )?days for (?:payment|delivery))",
      "low", "The money or the goods arrive later than the page suggests."),
     ("tax paperwork",
      r"(w-?8\s?ben|w-?9\b|tax form|withholding|form 1099)",

@@ -27,13 +27,19 @@ HARD_RULES = [
     ("cash", r"(this is not a cash prize|not a cash prize|cannot be exchanged or redeemed for cash|"
              r"no cash (?:value|alternative)|not redeemable for cash|non-cash (?:award|prize|benefit))",
      "critical", "The page calls the sum cash and then says it is not."),
+    # A bare "in credits" was dropped. It matched "Built-in credits" on a
+    # pricing page and paired an unrelated plan price with a feature bullet.
+    # The phrase only means something when a verb of payment governs it.
     ("amount", r"(this is not a cash prize|cannot be exchanged or redeemed for cash|"
-               r"approximate retail value|\barv\b|in (?:product |sponsor-provided )?credits|"
-               r"consists of sponsor-provided)",
+               r"approximate retail value|\barv\b|consists of sponsor-provided|"
+               r"(?:paid|awarded|issued|granted|provided|delivered) in (?:product |sponsor[- ]provided )?credits)",
      "high", "The sum is shown as money and described as goods or credits elsewhere."),
-    ("free", r"(after (?:the|your) (?:free )?trial|auto[- ]?renew|will be charged|"
-             r"billed (?:monthly|annually|automatically)|payment method (?:is )?required|"
-             r"then \$?\d+(?:\.\d+)? ?(?:per|/) ?(?:month|year))",
+    # "billed monthly" alone was dropped. On a pricing page it is a toggle
+    # label, not a disclosure, and it fired on a page that discloses nothing.
+    ("free", r"(after (?:the|your) (?:free )?trial|auto[- ]?renew(?:s|al)?|will be charged|"
+             r"then \$?\d[\d,.]* ?(?:per|/|a ) ?(?:month|year|mo|yr)|"
+             r"payment method (?:is )?required|then switch to standard|"
+             r"billed (?:monthly|annually) (?:at|from) )",
      "high", "Free is announced and a charge is described elsewhere."),
     ("nofee", r"(processing fee|service fee|transaction fee|handling fee|a fee of|"
               r"fees may apply|plus applicable fees|commission of)",
@@ -46,8 +52,11 @@ HARD_RULES = [
                r"open to everyone except|must be (?:a )?(?:legal )?resident|"
                r"currently enrolled|students? only)",
      "high", "Open to all is announced and a residency or status condition is set elsewhere."),
-    ("instant", r"(within \d+ (?:business )?days|allow \d+ (?:to \d+ )?(?:business )?days|"
-                r"processing time|may take up to|delivered within \d+)",
+    # A refund window is not a delay on a delivery promise. The first version
+    # paired "instant setup" with "30 days for a full refund" and was wrong.
+    ("instant", r"((?<!refund )within \d+ (?:business )?days(?! of purchase)|"
+                r"allow \d+ (?:to \d+ )?(?:business )?days|processing time|"
+                r"may take up to \d+|delivered within \d+)",
      "medium", "Immediacy is announced and a delay is stated elsewhere."),
     ("lifetime", r"(for as long as (?:the|we)|we may (?:discontinue|terminate|modify)|"
                  r"subject to change (?:at any time|without notice))",
@@ -91,6 +100,26 @@ def _dedupe(findings):
     return out
 
 
+STOP = set("the a an and or of to in on for with your you our we is are be that this it as at "
+           "by from any all not no can will may per".split())
+
+
+def _shares_topic(claim, sentence) -> bool:
+    """A counter sentence has to be about the same thing as the promise.
+
+    Added after a false positive that paired an instant setup promise with a
+    refund window. Both mentioned a number of days and nothing else, and on a
+    long marketing page that is not a coincidence worth reporting.
+    """
+    a = {w for w in re.findall(r"[a-z]{4,}", claim.context.lower())} - STOP
+    b = {w for w in re.findall(r"[a-z]{4,}", sentence.text.lower())} - STOP
+    return bool(a & b)
+
+
+# Rules loose enough that a shared subject is required before reporting.
+NEEDS_TOPIC = {"instant", "unlimited", "lifetime", "guarantee"}
+
+
 def by_rules(doc, claims, sents):
     """Search every sentence of the page, not only the quiet ones.
 
@@ -107,6 +136,8 @@ def by_rules(doc, claims, sents):
                     continue                       # a sentence cannot deny itself
                 m = rx.search(s.text)
                 if not m:
+                    continue
+                if kind in NEEDS_TOPIC and not _shares_topic(c, s):
                     continue
                 out.append(Finding(
                     claim_kind=c.kind, claim=c.context or c.text, counter=s.excerpt(300),
