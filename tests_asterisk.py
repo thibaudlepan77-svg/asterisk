@@ -236,5 +236,28 @@ class Distance(unittest.TestCase):
         self.assertIsNone(f.distance())
 
 
+class HtmlReport(unittest.TestCase):
+    def test_it_escapes_what_it_quotes(self):
+        """A page can put a script tag inside its own fine print."""
+        from asterisk import html as H
+        from asterisk.audit import Finding
+        f = Finding(claim_kind="cash", claim="<script>alert(1)</script>", counter="b & c",
+                    severity="critical", explanation="x", source="rule")
+        out = H.render("http://x", [], [f])
+        self.assertNotIn("<script>alert(1)</script>", out)
+        self.assertIn("&lt;script&gt;", out)
+
+    def test_an_unread_page_says_so_and_shows_nothing_else(self):
+        from asterisk import html as H
+        out = H.render("http://x", [], [], unreadable=True)
+        self.assertIn("did not render", out)
+        self.assertNotIn("Nothing found", out)
+
+    def test_a_clean_page_says_it_is_a_result(self):
+        from asterisk import html as H
+        out = H.render("http://x", [], [])
+        self.assertIn("not a failure", out)
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)

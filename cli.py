@@ -11,7 +11,7 @@ import os
 import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from asterisk import fetch, report, watch               # noqa: E402
+from asterisk import fetch, report, watch, html as htmlout   # noqa: E402
 from asterisk.audit import audit                        # noqa: E402
 from asterisk.segment import segment                    # noqa: E402
 from asterisk import llm                                # noqa: E402
@@ -22,6 +22,8 @@ def main(argv=None) -> int:
     p.add_argument("target", help="a URL, or a path to a saved HTML file")
     p.add_argument("--offline", action="store_true", help="deterministic rules only, no inference call")
     p.add_argument("--json", action="store_true", help="machine readable output")
+    p.add_argument("--html", metavar="FILE",
+                   help="write a self contained HTML report you can open or send")
     p.add_argument("--model", default=None, help="model id, defaults to %s" % llm.DEFAULT_MODEL)
     p.add_argument("--loudness", type=float, default=0.6, help="how prominent a claim must be to be checked")
     p.add_argument("--watch", action="store_true",
@@ -54,8 +56,13 @@ def main(argv=None) -> int:
         print("no API key found, running deterministic rules only", file=sys.stderr)
     claims, findings = audit(doc, offline=offline, model=a.model,
                              min_loudness=a.loudness, verbose=a.verbose)
-    print(report.as_json(url, claims, findings, unreadable=blind) if a.json
-          else report.as_text(url, claims, findings, unreadable=blind))
+    if a.html:
+        with open(a.html, "w", encoding="utf-8") as fh:
+            fh.write(htmlout.render(url, claims, findings, unreadable=blind))
+        print("report written to %s" % a.html)
+    else:
+        print(report.as_json(url, claims, findings, unreadable=blind) if a.json
+              else report.as_text(url, claims, findings, unreadable=blind))
     if a.watch and not blind:
         d, _ = watch.diff(url, claims, findings)
         watch.save(url, claims, findings)

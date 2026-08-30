@@ -105,6 +105,16 @@ what nothing on the page contradicts.
 
 ![architecture](docs/architecture.png)
 
+It also writes a self contained HTML report, one file, no server and no assets,
+that can be opened, mailed, or kept as a dated record of what an offer said on
+the day you accepted it.
+
+```bash
+python cli.py --offline --html report.html https://example.com/offer
+```
+
+![report](docs/report.png)
+
 ---
 
 ## How it works
@@ -419,6 +429,7 @@ browser like agent, and says nothing about authentication. The client sends a
 
 ```
 python cli.py --json URL          machine readable output
+python cli.py --html FILE URL     a self contained HTML report
 python cli.py --offline URL       deterministic layer only
 python cli.py --browser URL       render in a real browser first
 python cli.py --watch URL         snapshot, and report what moved since last time
@@ -463,12 +474,13 @@ asterisk/links.py         which links could hold a binding clause, ranked
 asterisk/guard.py         verifies the quotes in the FINAL answer, after the model
 asterisk/watch.py         snapshots an audit and diffs it against the last one
 asterisk/report.py        text and JSON output
+asterisk/html.py          a self contained HTML report, one file
 asterisk/llm.py           any OpenAI compatible endpoint
 eval/                     labelled pages, scorer, held out set builder
 demo/app.py               a small Gradio front end, see demo/README.md
 cli.py                    one page, deterministic entry point
 agent.py                  multi page agent on the Strands Agents SDK
-tests_asterisk.py         regression and witness tests, 23 of them
+tests_asterisk.py         regression and witness tests, 30 of them
 docs/architecture.svg     the diagram above, source
 video/make_video.py       builds the demo video from slides and a synthetic voice
 ```
