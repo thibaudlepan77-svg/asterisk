@@ -57,12 +57,22 @@ after the last token, on the text you actually read. An altered quote is now
 shown as altered, next to what the page really says.
 
 ## 8. THE NUMBERS  (2:10 - 2:30)
-VISUAL, the two evaluation tables.
+VISUAL, the held out table, four labels.
 NARRATION.
 On forty pages drawn at random from thirteen thousand finished contests, pages
-the rules were never written against, it finds every restricted one and raises
-no false alarm on the rest. The tables and the script that prints them are in
-the repository.
+the rules were never written against, three labels are scored and the fourth
+has no positive case to score. The one figure below one is the reference and
+not the tool. Its single false alarm quotes a page that plainly asks for a
+video, and the quote is in the readme.
+
+## 8b. THE REFERENCE WAS WRONG  (2:30 - 2:48)
+VISUAL, the 0.27 slide.
+NARRATION.
+One number came back bad, and it was the measurement. The first version of that
+reference scored the tool at zero point two seven, and every one of its eleven
+false alarms was a page that plainly asks for a video. It had been built from
+the one wording its author had read. It was rewritten once, and deliberately
+not a second time.
 
 ## 9. THE LIMIT I WILL NOT HIDE  (2:30 - 2:45)
 VISUAL, the red warning block.
@@ -71,8 +81,9 @@ Two pages in ten draw their prices in the browser. On those, a plain fetch sees
 nothing, and reporting nothing found would be the worst thing this tool could
 do. So it says so, loudly, and exits with its own code.
 
-## 10. CLOSE  (2:45 - 2:55)
-VISUAL, repository address, MIT.
+## 10. CLOSE  (3:00 - 3:12)
+VISUAL, repository address, gallery address, MIT.
 NARRATION.
-Asterisk. Read the asterisk before you read the promise. MIT licensed, and the
-measurements are rerunnable.
+Asterisk. Read the asterisk before you read the promise. MIT licensed, the
+measurements are rerunnable, and its reports on eight pages you already know
+are online.

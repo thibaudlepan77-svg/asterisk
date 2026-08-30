@@ -19,6 +19,9 @@ import sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(HERE, "build")
 VOICE = "en-US-AndrewNeural"
+# Duration cap of the contest this cut targets, in seconds. 300 for the AWS
+# hackathon, `Video (Maximum 5 Minutes)`, read in its rules on 2026-08-30.
+PLAFOND = 300
 
 CSS = """
 *{box-sizing:border-box;margin:0;padding:0}
@@ -137,14 +140,27 @@ and they still bind you
      """<div class="kicker">held out set</div>
         <h2>40 pages drawn at random from 13,632 finished contests,<br>
         pages the rules were never written against.</h2>
-        <pre>students_only      tp  4  fp  0  fn  0  tn 36
-                   precision <span class="ok">1.00</span>  recall <span class="ok">1.00</span>  f1 <span class="ok">1.00</span>
-
-prize_is_not_cash  no positive case in this set.
-                   false alarms <span class="ok">0</span> on 40 pages</pre>""",
+        <pre>students_only        precision <span class="ok">1.00</span>  recall <span class="ok">1.00</span>   4 positives
+team_required        precision <span class="ok">1.00</span>  recall <span class="ok">1.00</span>   5 positives
+a_video_is_required  precision <span class="warn">0.88</span>  recall <span class="ok">1.00</span>   7 positives
+prize_is_not_cash    no positive case here, <span class="ok">0</span> false alarms on 40</pre>""",
      "On forty pages drawn at random from thirteen thousand finished contests, pages the rules "
-     "were never written against, it finds every restricted one and raises no false alarm on "
-     "the rest. The tables and the script that prints them are in the repository."),
+     "were never written against, three labels are scored and the fourth has no positive case "
+     "to score. The one figure below one is the reference and not the tool. Its single false "
+     "alarm quotes a page that plainly asks for a video, and the quote is in the readme."),
+
+    ("the reference was wrong",
+     """<div class="kicker">the measurement, not the tool</div>
+        <h1>0.27 precision,<br>and the tool was right.</h1>
+        <p>The first version of that reference scored eleven false alarms.
+        Every one of the eleven was a page that plainly asks for a video.
+        It had been built from the one wording its author had read.</p>
+        <p class="dim">It was rewritten once, and deliberately not a second time.
+        Tuning a ground truth until the tool looks perfect is fitting the answer.</p>""",
+     "One number came back bad, and it was the measurement. The first version of that reference "
+     "scored the tool at zero point two seven, and every one of its eleven false alarms was a "
+     "page that plainly asks for a video. It had been built from the one wording its author had "
+     "read. It was rewritten once, and deliberately not a second time."),
 
     ("watching",
      """<div class="kicker">an offer is a moving thing</div>
@@ -179,9 +195,11 @@ Compared with the snapshot taken 2026-08-30 07:31:02, 3 stored.
      """<div class="kicker">mit licensed</div>
         <h1>Asterisk.</h1>
         <h2>Read the asterisk before you read the promise.</h2>
-        <p class="ok">github.com/thibaudlepan77-svg/asterisk</p>""",
-     "Asterisk. Read the asterisk before you read the promise. MIT licensed, and the "
-     "measurements are rerunnable."),
+        <p class="ok">github.com/thibaudlepan77-svg/asterisk</p>
+        <p class="ok">thibaudlepan77-svg.github.io/asterisk</p>
+        <p class="dim">eight reports on pages you already know</p>""",
+     "Asterisk. Read the asterisk before you read the promise. MIT licensed, the measurements "
+     "are rerunnable, and its reports on eight pages you already know are online."),
 ]
 
 
@@ -245,7 +263,17 @@ def assemble():
             f.write("file '%s'\n" % p.replace("\\", "/"))
     final = os.path.join(HERE, "asterisk-demo.mp4")
     run(["ffmpeg", "-y", "-f", "concat", "-safe", "0", "-i", lst, "-c", "copy", final])
-    print("\nvideo, %s, %.1f s" % (final, duration(final)))
+    d = duration(final)
+    print("\nvideo, %s, %.1f s" % (final, d))
+    # THE CAP FAILS LOUDLY, IT IS NOT A COMMENT. Its sister builder caught a
+    # video at 183 seconds against a 180 second rule, and five sentences had
+    # to be cut. Without it, a refused submission is discovered by the judge.
+    # PLAFOND is the limit of the contest this video is cut for. A shorter
+    # contest needs that number changed, not remembered.
+    if d > PLAFOND:
+        raise SystemExit("REFUSED, %.1f s is over the %d s cap of the contest. "
+                         "Cut narration, do not raise the cap." % (d, PLAFOND))
+    print("under the %d s cap, %.0f s of margin" % (PLAFOND, PLAFOND - d))
 
 
 def main(argv=None):
