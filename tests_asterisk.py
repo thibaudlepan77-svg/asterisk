@@ -4,6 +4,8 @@
 Both errors were found by measurement rather than by reading the code, so
 each one is pinned here to stop it coming back.
 """
+import contextlib
+import io
 import os
 import sys
 import unittest
@@ -603,5 +605,80 @@ class VideoRequired(unittest.TestCase):
         self.assertFalse(self._fires("The cafeteria serves lunch between eleven and two"))
 
 
+class ModelComparison(unittest.TestCase):
+    """The comparison bench must not lie in the two ways a scoreboard usually does.
+
+    A benchmark that spends money without warning, and a benchmark that prints
+    a confident zero for a class it never saw. Both are pinned here because
+    both are silent, and a silent wrong number outlives every loud one.
+    """
+
+    def setUp(self):
+        from eval import compare_models
+        self.cm = compare_models
+
+    def quietly(self, fn, *a):
+        """The bench talks to a human. Under test we want the return code, and
+        a suite that prints its own fixtures is a suite nobody reads."""
+        out = io.StringIO()
+        with contextlib.redirect_stdout(out):
+            code = fn(*a)
+        return code, out.getvalue()
+
+    def test_metered_run_refuses_without_confirmation(self):
+        """Naming a model must not start spending on its own."""
+        code, _ = self.quietly(self.cm.main, ["--models", "some-model", "--limit", "1"])
+        self.assertEqual(code, 1, "a metered run must stop and ask before spending")
+
+    def test_estimate_prints_without_running(self):
+        code, text = self.quietly(self.cm.main, ["--models", "a,b", "--limit", "3",
+                                                 "--estimate-only"])
+        self.assertEqual(code, 0)
+        self.assertIn("worst case model calls", text)
+
+    def test_empty_class_is_not_scored_as_zero(self):
+        """An f1 of zero on a class with no positive case is a lie about the tool.
+
+        The bench must exclude such a class from the ranking rather than rank
+        every model last on it.
+        """
+        counts = self.cm.empty_counts()
+        label = next(iter(self.cm.PREDICTS))
+        counts[label] = {"tp": 0, "fp": 1, "fn": 0, "tn": 9}
+        out = io.StringIO()
+        with contextlib.redirect_stdout(out):
+            self.cm.table([("a model", counts, 10)])
+        text = out.getvalue()
+        self.assertIn("no positive case", text)
+        self.assertNotIn("0.00", text.split(label)[1][:200],
+                         "an empty class must not be printed as a score of zero")
+
+    def test_verdict_names_a_model_that_adds_nothing(self):
+        """The point of the table. A model that ties the baseline must be told so."""
+        label = next(iter(self.cm.PREDICTS))
+        base = self.cm.empty_counts()
+        base[label] = {"tp": 5, "fp": 0, "fn": 0, "tn": 5}
+        same = self.cm.empty_counts()
+        same[label] = {"tp": 5, "fp": 0, "fn": 0, "tn": 5}
+        out = io.StringIO()
+        with contextlib.redirect_stdout(out):
+            self.cm.verdict([(self.cm.BASELINE, base, 10), ("costly model", same, 10)])
+        self.assertIn("NOTHING", out.getvalue())
+
+    def test_verdict_credits_a_model_that_actually_wins(self):
+        label = next(iter(self.cm.PREDICTS))
+        base = self.cm.empty_counts()
+        base[label] = {"tp": 2, "fp": 0, "fn": 3, "tn": 5}
+        better = self.cm.empty_counts()
+        better[label] = {"tp": 5, "fp": 0, "fn": 0, "tn": 5}
+        out = io.StringIO()
+        with contextlib.redirect_stdout(out):
+            self.cm.verdict([(self.cm.BASELINE, base, 10), ("good model", better, 10)])
+        text = out.getvalue()
+        self.assertIn("beats the baseline on", text)
+        self.assertNotIn("NOTHING", text)
+
+
 if __name__ == "__main__":
+
     unittest.main(verbosity=2)
