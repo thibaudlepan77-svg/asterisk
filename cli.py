@@ -24,6 +24,8 @@ def main(argv=None) -> int:
     p.add_argument("--json", action="store_true", help="machine readable output")
     p.add_argument("--model", default=None, help="model id, defaults to %s" % llm.DEFAULT_MODEL)
     p.add_argument("--loudness", type=float, default=0.6, help="how prominent a claim must be to be checked")
+    p.add_argument("--browser", action="store_true",
+                   help="render the page in a real browser, for sites drawn in JavaScript")
     p.add_argument("--no-cache", action="store_true")
     p.add_argument("-v", "--verbose", action="store_true")
     a = p.parse_args(argv)
@@ -35,19 +37,25 @@ def main(argv=None) -> int:
     else:
         url = a.target
         try:
-            html = fetch.fetch(url, use_cache=not a.no_cache)
+            html = fetch.get(url, browser=a.browser, use_cache=not a.no_cache)
         except Exception as e:
             print("could not fetch %s, %s" % (url, e), file=sys.stderr)
             return 2
 
     doc = segment(html, url)
+    blind = doc.looks_unreadable()
+    if blind and not a.browser:
+        print("this page returned almost no text, retrying in a browser would be wise",
+              file=sys.stderr)
     offline = a.offline or not llm.available()
     if offline and not a.offline and a.verbose:
         print("no API key found, running deterministic rules only", file=sys.stderr)
     claims, findings = audit(doc, offline=offline, model=a.model,
                              min_loudness=a.loudness, verbose=a.verbose)
-    print(report.as_json(url, claims, findings) if a.json
-          else report.as_text(url, claims, findings))
+    print(report.as_json(url, claims, findings, unreadable=blind) if a.json
+          else report.as_text(url, claims, findings, unreadable=blind))
+    if blind:
+        return 2
     return 1 if any(f.severity in ("critical", "high") for f in findings) else 0
 
 

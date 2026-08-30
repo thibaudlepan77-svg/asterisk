@@ -109,5 +109,25 @@ class OutputGrounding(unittest.TestCase):
         self.assertIn("the page says", txt)
 
 
+class Blindness(unittest.TestCase):
+    """A confident nothing found on a page we never read is the worst output."""
+
+    def test_shell_page_is_flagged(self):
+        doc = segment("<html><body><div id=root></div><h1>Pricing</h1></body></html>", "x")
+        self.assertTrue(doc.looks_unreadable())
+
+    def test_real_page_is_not_flagged(self):
+        body = "".join("<p>Sentence number %d, with enough words to count as real text here.</p>" % i
+                       for i in range(30))
+        doc = segment("<html><body><h1>Pricing</h1>%s</body></html>" % body, "x")
+        self.assertFalse(doc.looks_unreadable())
+
+    def test_report_says_so_loudly(self):
+        from asterisk import report
+        txt = report.as_text("x", [], [], unreadable=True)
+        self.assertIn("DID NOT RENDER", txt)
+        self.assertIn("NOT a clean bill of health", txt)
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)

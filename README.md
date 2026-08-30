@@ -201,11 +201,27 @@ What it got wrong on the first pass, and what changed.
 - It matched `in credits` inside **Built-in credits** and paired a plan price
   with a feature bullet. The phrase now needs a verb of payment in front of it.
 
-And what it still cannot do. **Two of the ten pages render their prices in the
-browser**, so a plain fetch sees one line of text and the tool correctly finds
-nothing in nothing. It does not know the difference between a page with no
-catch and a page it could not read, and that is the most dangerous gap left in
-it. A browser fetch would close it and has not been added.
+**And the gap that mattered most, now closed.** Two of the ten pages draw
+their prices in the browser, so a plain fetch sees a one line shell and the
+tool honestly finds nothing in nothing. Reporting that as "nothing found" is
+the worst thing this tool could do, because silence and a clean bill of health
+look identical to a reader.
+
+So the tool now refuses to be silent about it.
+
+```
+$ python cli.py --offline https://www.canva.com/pricing/
+
+!! THIS PAGE DID NOT RENDER FOR US. Almost no text came back, which usually
+!! means the content is drawn by the browser. Anything below is a report on
+!! an empty page, NOT a clean bill of health. Retry with --browser.
+```
+
+It exits with code 2 in that case, distinct from 0 for clean and 1 for a
+finding, and the JSON output carries `page_rendered: false`. Adding
+`--browser` renders the page properly, and the same Canva page goes from one
+claim to eight. The browser path is optional and imported only when asked for,
+because the deterministic path having zero dependencies is worth keeping.
 
 ---
 
@@ -293,12 +309,15 @@ hammer somebody's site.
 ```
 python cli.py --json URL          machine readable output
 python cli.py --offline URL       deterministic layer only
+python cli.py --browser URL       render in a real browser first
 python cli.py --loudness 0.4 URL  check less prominent claims too
 python cli.py file.html           audit a saved page
 ```
 
-Exit code is 1 when a critical or high contradiction is found, so it drops
-into a shell pipeline or a CI check without extra glue.
+Exit codes, 0 nothing found, 1 a critical or high contradiction, 2 the page did
+not render so the result means nothing. It drops into a shell pipeline or a CI
+check without extra glue, and the third code exists so that a monitor cannot
+mistake blindness for a clean result.
 
 ---
 
@@ -313,6 +332,8 @@ into a shell pipeline or a CI check without extra glue.
   are the English ones. The model layer is not language bound, the rules are.
 - **The development set is small and specialised.** Twenty two contest pages.
   The held out set widens it, and neither is a survey of the web.
+- **It reads what a browser would show, not what a login would show.** Prices
+  behind an account, a geofence or a paywall are out of reach.
 - **A false negative is silent.** The tool proves that something is on the
   page. It never proves that nothing else is.
 

@@ -71,6 +71,17 @@ class Document:
     def quiet(self):
         return [b for b in self.lines if b.fine_print]
 
+    def looks_unreadable(self, min_lines: int = 12, min_chars: int = 900) -> bool:
+        """True when the page almost certainly did not render for us.
+
+        The most dangerous failure this tool can have is not a wrong finding,
+        it is a confident "nothing found" on a page it never actually read.
+        Client rendered pricing pages arrive as a shell of one or two lines.
+        Silence about those is indistinguishable from a clean bill of health,
+        so the caller has to be able to tell the two apart.
+        """
+        return len(self.lines) < min_lines or len(self.flat) < min_chars
+
     def contains(self, quote: str) -> bool:
         """The grounding gate. A finding may only cite text that is really here."""
         return _norm(quote) in _norm(self.flat)
