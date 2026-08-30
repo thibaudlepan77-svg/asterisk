@@ -28,7 +28,7 @@ configuration the numbers below come from. Nothing in the code knows a vendor.
 ```bash
 git clone https://github.com/thibaudlepan77-svg/asterisk && cd asterisk
 python cli.py --offline https://gibc-v2.devpost.com/     # no key, no install
-python tests_asterisk.py                                 # 36 tests
+python tests_asterisk.py                                 # 63 tests
 python eval/run_eval.py --offline                        # the numbers, rerun
 ```
 

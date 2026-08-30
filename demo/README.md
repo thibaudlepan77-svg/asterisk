@@ -15,6 +15,9 @@ work can be tested without starting a server, and it is, in
 about thirty lines of layout.
 
 **The server itself has still not been started**, so the layout has not been
-seen rendered. That is stated rather than implied, because this repository is a
+seen rendered. What HAS been published is the output of the same engine on
+eight real pages, <https://thibaudlepan77-svg.github.io/asterisk/>, generated
+by `docs/build_gallery.py` and rebuildable by one command. If you want to see
+what this tool says before installing anything, look there rather than here. That is stated rather than implied, because this repository is a
 tool about claims a page does not back up and it would be a poor joke to make
 one.
