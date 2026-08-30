@@ -317,5 +317,88 @@ class OwnershipVersusLicence(unittest.TestCase):
         self.assertEqual([f for f in findings if f.claim_kind == "ownership"], [])
 
 
+
+
+class SponsorCreditsAreNotThePrize(unittest.TestCase):
+    """Regression, measured 2026-08-30 on a live page and scored on the bench.
+
+    A contest paying $12,000 in cash carried, under a heading about free
+    partner credits, the sentence `AWS Promotional Credits are not redeemable
+    for cash`. Both statements are true and neither denies the other. The tool
+    reported that the prize was not money, which is the worst direction for
+    this error, because a reader who believes it skips a contest that pays and
+    never finds out they were wrong.
+    """
+
+    CREDITS_ASIDE = (
+        "<h1>OpenCV AI Competition</h1><p>$12,000 in cash</p>"
+        "<h2>Free AWS Credits for New Members</h2>"
+        "<p>AWS Promotional Credits are not redeemable for cash and can only "
+        "be applied to AWS Services.</p>"
+    )
+    REAL_DENIAL = (
+        "<h1>Global Innovation Build</h1><p>$149,525 in cash</p>"
+        "<h2>Gold tier</h2><p>This award consists of sponsor-provided product "
+        "credits, subscriptions, software licenses, domains, or other non-cash "
+        "benefits and cannot be exchanged or redeemed for cash.</p>"
+    )
+
+    def _cash_findings(self, html):
+        doc = segment(html)
+        _, findings = audit(doc, offline=True)
+        return [f for f in findings if f.claim_kind in ("cash", "amount")]
+
+    def test_an_aside_about_partner_credits_does_not_deny_the_prize(self):
+        self.assertEqual([], self._cash_findings(self.CREDITS_ASIDE),
+                         "a sentence about a separately named item must not "
+                         "cancel the cash promise")
+
+    def test_a_denial_that_names_the_award_still_fires(self):
+        """The guard must not be a mute button. This is the witness."""
+        self.assertTrue(self._cash_findings(self.REAL_DENIAL),
+                        "a denial whose subject is the award itself must "
+                        "still be reported")
+
+
+class PublicationAndAdvancementCost(unittest.TestCase):
+    """Two restriction families added 2026-08-30, both paid for the same day.
+
+    Eleven of fifteen open cash contests required publishing on a platform the
+    entrant does not control, and not one eligibility card said so. And on one
+    page, being selected sends you a bill of five hundred dollars while the
+    only number shown at the top is the prize.
+    """
+
+    def _labels(self, text):
+        from asterisk import restrictions
+        from asterisk.sentences import split
+        from asterisk.segment import segment as seg
+
+        doc = seg("<p>%s</p>" % text)
+        from asterisk.sentences import sentences
+        return {r["label"] for r in restrictions.find(doc, sentences(doc))}
+
+    def test_video_link_requirement_is_reported(self):
+        self.assertIn("third party publication required",
+                      self._labels("Provide a link to a YouTube or TikTok "
+                                   "video of no more than three minutes."))
+
+    def test_hosted_demo_requirement_is_reported(self):
+        self.assertIn("third party publication required",
+                      self._labels("Submissions must include a publicly "
+                                   "accessible URL where judges can test it."))
+
+    def test_being_selected_can_cost_money(self):
+        self.assertIn("advancement costs money",
+                      self._labels("The remaining 90 selected teams pay a "
+                                   "$500 USD fee per team."))
+
+    def test_a_channel_mention_is_not_a_requirement(self):
+        """Witness. The detector has to stay quiet on an ordinary mention."""
+        self.assertNotIn("third party publication required",
+                         self._labels("Follow the challenge on YouTube for "
+                                      "weekly updates from the organisers."))
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)

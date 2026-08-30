@@ -76,7 +76,53 @@ RESTRICTIONS = [
      r"(grant(?:s)? (?:the )?sponsor a[^.]{0,60}(?:licen[cs]e|right)|"
      r"irrevocable[^.]{0,40}licen[cs]e|assign(?:s)? all rights)",
      "high", "You hand over rights on what you submit."),
+    # Added 2026-08-30 after measuring fifteen open cash contests. Eleven
+    # required this and not one eligibility card mentioned it. A reader can be
+    # perfectly eligible, perfectly capable, and still unable to finish,
+    # because finishing needs an account on a platform they do not control.
+    ("third party publication required",
+     r"((?:must|shall|required to|need to|provide|include)[^.]{0,80}"
+     r"(?:video|link|url)[^.]{0,60}(?:youtube|vimeo|tiktok)|"
+     r"(?:video|submission)[^.]{0,60}uploaded publicly|"
+     r"publicly[- ]accessible (?:url|link|site|website|demo|deployment|version)|"
+     r"(?:must|shall|required)[^.]{0,80}(?:apple app store|google play))",
+     "high", "Finishing this requires publishing on a platform you may not control."),
+    # Added the same day, from a page where being selected sends you a bill.
+    # A hundred entrants advance, ten are paid, and ninety owe five hundred
+    # dollars. The page shows one number, the prize, at the top.
+    ("advancement costs money",
+     r"((?:selected|advancing|qualifying|finalist|shortlisted)[^.]{0,80}"
+     r"(?:pay a|pays a|fee of|must pay)|"
+     r"(?:remaining|other) \d+ (?:selected )?teams? pay|"
+     r"(?:pay|fee)[^.]{0,60}to (?:advance|proceed|receive your))",
+     "critical", "A good result here costs you money rather than paying you."),
 ]
+
+# PORTEE, ajoutee le 2026-08-30 apres une fausse alerte mesuree sur le banc.
+#
+# LE CAS. Un concours dote de 12 000 USD EN ESPECES ecrit, dans une section de
+# remerciement a son partenaire, `AWS Promotional Credits are not redeemable
+# for cash`. La phrase est vraie et elle ne parle PAS du prix, elle parle d'un
+# lot annexe. L'outil concluait que le prix n'etait pas en especes, et un
+# lecteur qui le croit ecarte un concours qui paie vraiment.
+#
+# LA REGLE. Une phrase qui NIE le caractere monetaire ne vaut pour LE PRIX que
+# si elle se trouve dans une section de prix. Ailleurs, elle reste montree,
+# parce que cacher une information n'est jamais la bonne reponse, mais elle est
+# montree pour ce qu'elle est, un lot annexe non monetaire, et non comme un
+# verdict sur la dotation.
+#
+# Ce n'est pas un reglage de seuil, c'est la definition meme de l'etiquette de
+# reference, `the prize block itself states the award cannot be exchanged`.
+# L'outil lisait toute la page la ou la verite terrain lit un bloc.
+PORTEE = {
+    "prize not cash": (
+        re.compile(r"(prize|award|winnings|what you (?:can )?win|rewards?)", re.I),
+        ("a listed item is not cash", "medium",
+         "Something named on this page cannot be exchanged for cash. Check whether "
+         "that is the whole award or only one item beside it."),
+    ),
+}
 
 _R = [(lab, re.compile(p, re.I), sev, why) for lab, p, sev, why in RESTRICTIONS]
 
@@ -92,6 +138,11 @@ def find(doc, sents, max_per_label: int = 1):
             m = rx.search(s.text)
             if not m:
                 continue
+            portee = PORTEE.get(label)
+            if portee is not None and not portee[0].search(s.section or ""):
+                label, sev, why = portee[1]
+                if seen.get(label, 0) >= max_per_label:
+                    continue
             seen[label] = seen.get(label, 0) + 1
             out.append({
                 "label": label,

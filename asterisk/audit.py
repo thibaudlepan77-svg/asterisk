@@ -142,6 +142,28 @@ def _shares_topic(claim, sentence) -> bool:
 # Rules loose enough that a shared subject is required before reporting.
 NEEDS_TOPIC = {"instant", "unlimited", "lifetime", "guarantee"}
 
+# Added 2026-08-30 after a measured false positive, and it is the same mistake
+# in a new place. A contest paying $12,000 IN CASH says, in a section headed
+# `Free AWS Credits for New Members`, that `AWS Promotional Credits are not
+# redeemable for cash`. Both sentences are true, neither denies the other, and
+# the tool reported that the prize was not money. A reader who believes it
+# skips a contest that really pays. That is the worst direction for this error,
+# because the reader never learns they were wrong.
+#
+# THE GATE. A denial only cancels a money promise when the denial is ABOUT the
+# award. Either it sits under a prize heading, or it names the award itself.
+# The standard legal wording carries its own subject, `this is not a cash
+# prize`, `the award consists of`, so honest disclosures pass unaided. What
+# fails is a sentence about a separately named item that happens to share the
+# word cash.
+NEEDS_PRIZE_SUBJECT = {"cash", "amount"}
+PRIZE_SUBJECT = re.compile(r"\b(prizes?|awards?|winnings?|rewards?)\b", re.I)
+
+
+def _about_the_award(sentence) -> bool:
+    return bool(PRIZE_SUBJECT.search(sentence.text)
+                or PRIZE_SUBJECT.search(sentence.section or ""))
+
 
 def by_rules(doc, claims, sents):
     """Search every sentence of the page, not only the quiet ones.
@@ -161,6 +183,8 @@ def by_rules(doc, claims, sents):
                 if not m:
                     continue
                 if kind in NEEDS_TOPIC and not _shares_topic(c, s):
+                    continue
+                if kind in NEEDS_PRIZE_SUBJECT and not _about_the_award(s):
                     continue
                 out.append(Finding(
                     claim_kind=c.kind, claim=c.context or c.text, counter=s.excerpt(300),
