@@ -85,6 +85,8 @@ already reported above as a contradiction, because this page does claim to be
 worldwide, so reporting it twice would pad the output. Quiet conditions are for
 what nothing on the page contradicts.
 
+![architecture](docs/architecture.png)
+
 ---
 
 ## How it works

@@ -1,0 +1,108 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1180 720" width="1180" height="720" font-family="Inter, Segoe UI, Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#5a6472"/>
+    </marker>
+    <marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1f6f4a"/>
+    </marker>
+    <style>
+      .box  { fill:#ffffff; stroke:#5a6472; stroke-width:1.6; rx:8; }
+      .t    { font-size:15px; fill:#12161c; font-weight:600; }
+      .s    { font-size:12.5px; fill:#48505c; }
+      .lab  { font-size:12px; fill:#5a6472; }
+      .gate { fill:#eef7f1; stroke:#1f6f4a; stroke-width:2; rx:8; }
+      .gt   { font-size:15px; fill:#12442e; font-weight:700; }
+      .gs   { font-size:12.5px; fill:#1f6f4a; }
+      .band { font-size:13px; fill:#7a8492; font-weight:700; letter-spacing:.08em; }
+      .ln   { stroke:#5a6472; stroke-width:1.6; fill:none; }
+      .lng  { stroke:#1f6f4a; stroke-width:2; fill:none; }
+      .dash { stroke:#9aa3b0; stroke-width:1.4; stroke-dasharray:5 4; fill:none; }
+    </style>
+  </defs>
+
+  <rect width="1180" height="720" fill="#ffffff"/>
+  <text x="40" y="46" font-size="24" font-weight="700" fill="#12161c">Asterisk</text>
+  <text x="40" y="70" font-size="14.5" fill="#48505c">Where a page takes back what it announced. Deterministic where it can be, a model only where judgement is needed, and verified after the last token.</text>
+
+  <text x="40" y="112" class="band">ONE PAGE, NO MODEL NEEDED</text>
+  <line x1="40" y1="122" x2="1140" y2="122" stroke="#e3e7ec" stroke-width="1"/>
+
+  <rect class="box" x="40"  y="140" width="176" height="74"/>
+  <text x="58" y="168" class="t">fetch</text>
+  <text x="58" y="188" class="s">browser headers, disk cache</text>
+  <text x="58" y="204" class="s">--browser renders JS pages</text>
+
+  <rect class="box" x="248" y="140" width="200" height="74"/>
+  <text x="266" y="168" class="t">segment</text>
+  <text x="266" y="188" class="s">merges shattered fragments</text>
+  <text x="266" y="204" class="s">depth scored against the page</text>
+
+  <rect class="box" x="480" y="140" width="196" height="74"/>
+  <text x="498" y="168" class="t">sentences</text>
+  <text x="498" y="188" class="s">the unit that carries</text>
+  <text x="498" y="204" class="s">a contradiction</text>
+
+  <rect class="box" x="708" y="140" width="196" height="74"/>
+  <text x="726" y="168" class="t">claims</text>
+  <text x="726" y="188" class="s">the loud promises,</text>
+  <text x="726" y="204" class="s">found by pattern</text>
+
+  <line class="ln" x1="216" y1="177" x2="242" y2="177" marker-end="url(#a)"/>
+  <line class="ln" x1="448" y1="177" x2="474" y2="177" marker-end="url(#a)"/>
+  <line class="ln" x1="676" y1="177" x2="702" y2="177" marker-end="url(#a)"/>
+
+  <rect class="box" x="248" y="266" width="292" height="96"/>
+  <text x="266" y="294" class="t">rules, no model</text>
+  <text x="266" y="316" class="s">legal formulas the law imposes,</text>
+  <text x="266" y="334" class="s">so they can be matched exactly.</text>
+  <text x="266" y="352" class="s">free, instant, invents nothing</text>
+
+  <rect class="box" x="576" y="266" width="292" height="96"/>
+  <text x="594" y="294" class="t">model layer</text>
+  <text x="594" y="316" class="s">everything never standardised.</text>
+  <text x="594" y="334" class="s">reads one claim against</text>
+  <text x="594" y="352" class="s">candidate passages</text>
+
+  <line class="ln" x1="806" y1="214" x2="722" y2="262" marker-end="url(#a)"/>
+  <line class="ln" x1="806" y1="214" x2="394" y2="262" marker-end="url(#a)"/>
+
+  <rect class="gate" x="576" y="404" width="292" height="80"/>
+  <text x="594" y="432" class="gt">grounding gate</text>
+  <text x="594" y="453" class="gs">a quote absent from the page</text>
+  <text x="594" y="471" class="gs">is dropped, not shown</text>
+  <line class="lng" x1="722" y1="362" x2="722" y2="400" marker-end="url(#ag)"/>
+
+  <rect class="box" x="248" y="404" width="292" height="80"/>
+  <text x="266" y="432" class="t">report</text>
+  <text x="266" y="453" class="s">contradictions, quiet conditions</text>
+  <text x="266" y="471" class="s">exit 0 clean, 1 finding, 2 unread</text>
+  <line class="ln" x1="394" y1="362" x2="394" y2="400" marker-end="url(#a)"/>
+  <line class="ln" x1="576" y1="444" x2="546" y2="444" marker-end="url(#a)"/>
+
+  <text x="620" y="540" class="band">MANY PAGES, WHERE JUDGEMENT IS ACTUALLY NEEDED</text>
+  <line x1="620" y1="550" x2="1140" y2="550" stroke="#e3e7ec" stroke-width="1"/>
+
+  <rect class="box" x="620" y="568" width="236" height="82"/>
+  <text x="638" y="596" class="t">agent, Strands SDK</text>
+  <text x="638" y="617" class="s">ranks condition links,</text>
+  <text x="638" y="635" class="s">follows what is worth a request</text>
+
+  <rect class="gate" x="888" y="568" width="252" height="82"/>
+  <text x="906" y="596" class="gt">output guard</text>
+  <text x="906" y="617" class="gs">runs after the last token,</text>
+  <text x="906" y="635" class="gs">on the text the reader sees</text>
+  <line class="lng" x1="856" y1="609" x2="884" y2="609" marker-end="url(#ag)"/>
+
+  <path class="dash" d="M 1014 568 L 1014 500 L 940 500 L 940 236 L 900 236" marker-end="url(#a)"/>
+  <text x="952" y="330" class="lab">the agent calls the</text>
+  <text x="952" y="348" class="lab">same one page audit</text>
+  <text x="952" y="366" class="lab">as one of its tools</text>
+
+  <rect x="40" y="568" width="540" height="118" fill="#fbfcfd" stroke="#e3e7ec" stroke-width="1.4" rx="8"/>
+  <text x="58" y="594" class="t">Two things this shape exists to prevent</text>
+  <text x="58" y="618" class="s">1. The starting audit is not the agent's decision. Asked to do it, the model</text>
+  <text x="58" y="636" class="s">    skipped it and called a page with three contradictions clean.</text>
+  <text x="58" y="658" class="s">2. A tool that lets a model attest to its own output has verified nothing. It</text>
+  <text x="58" y="676" class="s">    passed verify_quote, then respelled the quote and labelled it verified.</text>
+</svg>
