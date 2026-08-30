@@ -291,6 +291,37 @@ gate that has never refused anything proves nothing.
 
 ---
 
+## Watching, because an offer is a moving thing
+
+The idea did not come from a brainstorm, it came from a stopwatch. On 30 August
+2026, between 06:38 and 07:14, one contest's published count of cash prizes went
+from **ten to one**. Its prize page had not changed. Nobody was told. Anyone who
+had read it at 07:14 and compared it against a note from 06:38 would have seen
+it, and nobody keeps such notes.
+
+```
+python cli.py --offline --watch https://example.com/offer
+```
+
+The first run stores a snapshot. Every run after that reports what moved.
+
+```
+WHAT CHANGED, an offer is a moving thing
+Compared with the snapshot taken 2026-08-30 07:31:02, 3 stored.
+  APPEARED     Subscriptions renew automatically unless cancelled 24 hours before
+  REWORDED     91 % the same
+               was  The winner is paid within 30 days of the announcement
+               now  The winner is paid within 90 days of the announcement
+  PROMISE GONE Cancel any time
+```
+
+A rewording is matched rather than reported as one clause vanishing and another
+appearing, because thirty days becoming ninety is one event and it is the
+interesting one. `Nothing changed` is printed when nothing did, which is also
+worth knowing.
+
+---
+
 ## Install and run
 
 No dependencies beyond the Python standard library for the deterministic path.
@@ -322,6 +353,7 @@ browser like agent, and says nothing about authentication. The client sends a
 python cli.py --json URL          machine readable output
 python cli.py --offline URL       deterministic layer only
 python cli.py --browser URL       render in a real browser first
+python cli.py --watch URL         snapshot, and report what moved since last time
 python cli.py --loudness 0.4 URL  check less prominent claims too
 python cli.py file.html           audit a saved page
 ```
@@ -361,13 +393,14 @@ asterisk/audit.py         contradictions, rules and model, with the grounding ga
 asterisk/restrictions.py  quiet conditions that no headline contradicts
 asterisk/links.py         which links could hold a binding clause, ranked
 asterisk/guard.py         verifies the quotes in the FINAL answer, after the model
+asterisk/watch.py         snapshots an audit and diffs it against the last one
 asterisk/report.py        text and JSON output
 asterisk/llm.py           any OpenAI compatible endpoint
 eval/                     labelled pages, scorer, held out set builder
 demo/app.py               a small Gradio front end, see demo/README.md
 cli.py                    one page, deterministic entry point
 agent.py                  multi page agent on the Strands Agents SDK
-tests_asterisk.py         regression and witness tests, 15 of them
+tests_asterisk.py         regression and witness tests, 20 of them
 docs/architecture.svg     the diagram above, source
 video/make_video.py       builds the demo video from slides and a synthetic voice
 ```

@@ -129,5 +129,64 @@ class Blindness(unittest.TestCase):
         self.assertIn("NOT a clean bill of health", txt)
 
 
+class Watching(unittest.TestCase):
+    """An offer is a moving thing, and the changes that matter are unannounced."""
+
+    def setUp(self):
+        import tempfile
+        from asterisk import watch
+        self.tmp = tempfile.mkdtemp()
+        self.old_store = watch.STORE
+        watch.STORE = self.tmp
+        self.watch = watch
+
+    def tearDown(self):
+        self.watch.STORE = self.old_store
+
+    def audit_of(self, html):
+        doc = segment(html, "http://x")
+        return audit(doc, offline=True)
+
+    CLEAN = "<h1>Win $500 in cash</h1><p>Open to everyone worldwide.</p>"
+    DIRTY = ("<h1>Win $500 in cash</h1><p>Open to everyone worldwide.</p>"
+             "<div class='rules'><p>THIS IS NOT A CASH PRIZE. "
+             "It cannot be exchanged or redeemed for cash.</p></div>")
+
+    def test_first_look_has_nothing_to_compare(self):
+        c, f = self.audit_of(self.CLEAN)
+        d, _ = self.watch.diff("http://x", c, f)
+        self.assertIsNone(d)
+
+    def test_a_new_clause_is_reported_as_appeared(self):
+        c, f = self.audit_of(self.CLEAN)
+        self.watch.save("http://x", c, f)
+        c2, f2 = self.audit_of(self.DIRTY)
+        d, _ = self.watch.diff("http://x", c2, f2)
+        self.assertTrue(d["findings_appeared"], "a clause added later must show up")
+        self.assertIn("cash", d["findings_appeared"][0].lower())
+
+    def test_a_removed_clause_is_reported_as_disappeared(self):
+        c, f = self.audit_of(self.DIRTY)
+        self.watch.save("http://x", c, f)
+        c2, f2 = self.audit_of(self.CLEAN)
+        d, _ = self.watch.diff("http://x", c2, f2)
+        self.assertTrue(d["findings_disappeared"])
+
+    def test_a_rewording_is_not_read_as_two_events(self):
+        a = ["The winner is paid within 30 days of the announcement of results."]
+        b = ["The winner is paid within 90 days of the announcement of results."]
+        gone, appeared, reworded = self.watch._pair(a, b)
+        self.assertEqual(gone, [])
+        self.assertEqual(appeared, [])
+        self.assertEqual(len(reworded), 1)
+
+    def test_no_change_says_so(self):
+        c, f = self.audit_of(self.DIRTY)
+        self.watch.save("http://x", c, f)
+        c2, f2 = self.audit_of(self.DIRTY)
+        d, _ = self.watch.diff("http://x", c2, f2)
+        self.assertIn("Nothing changed", self.watch.render(d))
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)

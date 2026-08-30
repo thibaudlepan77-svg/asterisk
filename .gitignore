@@ -6,3 +6,4 @@ dev_run.py
 docs/submission.md
 video/build/
 video/*.mp4
+.watch/
