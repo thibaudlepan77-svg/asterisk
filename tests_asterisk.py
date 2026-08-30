@@ -400,5 +400,115 @@ class PublicationAndAdvancementCost(unittest.TestCase):
                                       "weekly updates from the organisers."))
 
 
+
+
+class Budgeting(unittest.TestCase):
+    """The page budget, which used to be a sentence in a prompt.
+
+    Written before the hook, and the first version of the hook failed the
+    fourth of these because the starting page was not counted.
+    """
+
+    def setUp(self):
+        from asterisk.budget import PageBudget
+        self.PageBudget = PageBudget
+
+    def test_a_page_within_budget_is_allowed(self):
+        b = self.PageBudget(3)
+        self.assertIsNone(b.decide("https://example.com/a"))
+
+    def test_the_page_past_the_limit_is_refused(self):
+        b = self.PageBudget(2)
+        b.decide("https://example.com/a")
+        b.decide("https://example.com/b")
+        motif = b.decide("https://example.com/c")
+        self.assertIsNotNone(motif)
+        self.assertIn("budget", motif.lower())
+
+    def test_the_same_page_written_two_ways_is_one_page(self):
+        """A trailing slash and a fragment are not a second request."""
+        b = self.PageBudget(4)
+        self.assertIsNone(b.decide("https://example.com/Terms"))
+        self.assertIsNotNone(b.decide("https://example.com/terms/"))
+        self.assertIsNotNone(b.decide("https://example.com/terms#refunds"))
+        self.assertEqual(b.spent, 1)
+
+    def test_a_refusal_still_leaves_room_for_another_page(self):
+        """Refusing a repeat must not spend a slot, or the budget shrinks by use."""
+        b = self.PageBudget(2)
+        b.decide("https://example.com/a")
+        b.decide("https://example.com/a")          # refuse, repeat
+        self.assertIsNone(b.decide("https://example.com/b"))
+
+    def test_an_empty_url_is_refused_without_spending(self):
+        b = self.PageBudget(1)
+        self.assertIsNotNone(b.decide(""))
+        self.assertEqual(b.spent, 0)
+
+    def test_a_budget_of_zero_is_refused_at_construction(self):
+        with self.assertRaises(ValueError):
+            self.PageBudget(0)
+
+    def test_the_refusal_tells_the_model_what_to_do_next(self):
+        """A refusal a model cannot act on becomes a retry loop.
+
+        Not a style check. The first refusal message said only `over budget`,
+        and the obvious next move for a model reading that is to try again.
+        """
+        b = self.PageBudget(1)
+        b.decide("https://example.com/a")
+        motif = b.decide("https://example.com/b")
+        self.assertTrue(any(m in motif.lower() for m in ("stop", "answer now")))
+
+
+class VerifyQuoteDoesNotFetch(unittest.TestCase):
+    """The hole the budget hook did not cover, found by asking who else fetches.
+
+    `verify_quote` used to fetch a page it had not seen, so a model that wanted
+    one more page only had to ask it to check a quote from that page. The
+    budget hook guards the audit tool and nothing else. **A limit one door
+    enforces and another ignores is not a limit.**
+    """
+
+    def test_the_agent_module_never_fetches_inside_verify_quote(self):
+        import io as _io
+        import re as _re
+        src = _io.open("agent.py", encoding="utf-8").read()
+        i = src.index("def verify_quote(")
+        j = src.index("class Budget(", i)
+        corps = src[i:j]
+        appels = [l for l in corps.splitlines()
+                  if "fetch.fetch(" in l and not l.strip().startswith("#")]
+        self.assertEqual(appels, [], "verify_quote fetches again, the budget is bypassed")
+
+
+
+
+class TheSdkContractTheBudgetRelieson(unittest.TestCase):
+    """Pins the two SDK facts the budget hook depends on.
+
+    The hook reads `tool_use["name"]` and `tool_use["input"]["url"]`, and hands
+    the agent a `hooks=` argument. If a future version of the SDK renames
+    either, the budget stops firing **and nothing else fails**, because a hook
+    that never runs looks exactly like a hook that always allows. That silent
+    mode is why these two lines are a test and not a comment.
+    """
+
+    def test_the_agent_still_takes_hooks(self):
+        import inspect
+        from strands import Agent
+        self.assertIn("hooks", inspect.signature(Agent.__init__).parameters)
+
+    def test_a_tool_use_still_carries_name_and_input(self):
+        from strands.types.tools import ToolUse
+        champs = getattr(ToolUse, "__annotations__", {})
+        self.assertIn("name", champs)
+        self.assertIn("input", champs)
+
+    def test_the_before_tool_event_can_still_cancel(self):
+        from strands.hooks import BeforeToolCallEvent
+        self.assertIn("cancel_tool", getattr(BeforeToolCallEvent, "__annotations__", {}))
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)

@@ -426,7 +426,7 @@ export ASTERISK_MODEL=the-model-id
 python agent.py https://example.com/offer --max-pages 4
 ```
 
-Two things in that loop were built after watching it fail.
+Three things in that loop were built after watching it fail.
 
 **The first audit is not the agent's decision.** In the first build the model
 was told to audit the starting page and then look further. It went straight to
@@ -462,6 +462,33 @@ An answer containing an unsupported quote exits non zero. The four tests in
 `tests_asterisk.py` under `OutputGrounding` are witness tests, they feed the
 guard a respelled quote and an invented one and require it to refuse both. A
 gate that has never refused anything proves nothing.
+
+**The page budget was a sentence in a prompt, and nothing enforced it.** The
+task text read `Budget, at most 4 pages in total`. That was the whole of it. A
+model that finds the fourth page interesting fetches a fifth, and the only
+thing that was ever going to stop it was a paragraph asking politely. A tool
+that reports where a page contradicts its own headline had a headline its own
+agent could contradict.
+
+The budget now lives in a `BeforeToolCall` hook, where `cancel_tool` turns a
+refusal into a refusal. The decision itself is twenty lines in
+`asterisk/budget.py` that need no model, no network and no agent to exercise,
+and the hook is a five line adapter over it. It refuses two things, the page
+past the limit, and a page already audited in the same run, which costs a
+request and returns nothing new.
+
+Writing that hook turned up the hole it did not cover. `verify_quote` fetched
+any page it had not seen, so a model that wanted a fifth page only had to ask
+it to check a quote from that page. **A limit one door enforces and another
+ignores is not a limit.** It now refuses, which is also the right answer on its
+own terms, since a check that fetches the page first is not testing the claim,
+it is manufacturing the evidence for it.
+
+Three tests pin the two SDK facts the hook stands on, that `Agent` still takes
+`hooks`, that a tool use still carries `name` and `input`, and that the event
+can still cancel. If a future version renames any of them the budget stops
+firing **and nothing else fails**, because a hook that never runs looks exactly
+like a hook that always allows.
 
 ---
 

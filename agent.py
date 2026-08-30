@@ -24,9 +24,11 @@ import sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from strands import Agent, tool                     # noqa: E402
+from strands.hooks import BeforeToolCallEvent, HookProvider, HookRegistry  # noqa: E402
 from strands.models.openai import OpenAIModel       # noqa: E402
 
 from asterisk import fetch, links, guard            # noqa: E402
+from asterisk.budget import PageBudget              # noqa: E402
 from asterisk.audit import audit, _relevant         # noqa: E402
 from asterisk.claims import extract                 # noqa: E402
 from asterisk.segment import segment                # noqa: E402
@@ -122,13 +124,53 @@ def verify_quote(url: str, quote: str) -> str:
         url: the page the quote is supposed to come from.
         quote: the exact text you intend to show.
     """
+    # THIS USED TO FETCH THE PAGE IF IT HAD NOT BEEN READ, and that was a hole
+    # straight through the page budget. The budget hook guards `audit_page`, so
+    # a model that wanted a fifth page only had to ask this tool to check a
+    # quote from it. Found while writing the hook, by asking which other tool
+    # touches the network. **A limit that one door enforces and another ignores
+    # is not a limit.**
+    #
+    # Refusing also happens to be the correct answer. You cannot quote a page
+    # you never read, and a check that silently reads it first is not checking
+    # the claim, it is manufacturing the evidence for it.
     if url not in _SEEN:
-        try:
-            html = fetch.fetch(url)
-            _SEEN[url] = {"html": html, "doc": segment(html, url)}
-        except Exception as e:
-            return json.dumps({"grounded": False, "reason": "could not fetch, %s" % e})
+        return json.dumps({
+            "grounded": False,
+            "reason": "that page has not been audited in this run, so nothing can be "
+                      "checked against it. Audit it first, within your budget, or drop "
+                      "the quote."})
     return json.dumps({"grounded": bool(_SEEN[url]["doc"].contains(quote))})
+
+
+class Budget(HookProvider):
+    """Enforces the page budget in the framework, not in the prompt.
+
+    The task text used to say `Budget, at most 4 pages in total` and nothing
+    checked it. **A tool that reports where a page contradicts its own headline
+    had a headline its own agent could contradict.** The budget now lives in a
+    `BeforeToolCall` hook, where `cancel_tool` turns a refusal into a refusal.
+
+    The decision itself is in `asterisk/budget.py`, testable without a model,
+    a network or an agent. This class is the adapter and holds no rule.
+    """
+
+    def __init__(self, limit: int):
+        self.budget = PageBudget(limit)
+        self.refused: list[str] = []
+
+    def register_hooks(self, registry: HookRegistry, **kwargs) -> None:
+        registry.add_callback(BeforeToolCallEvent, self.before_tool)
+
+    def before_tool(self, event: BeforeToolCallEvent) -> None:
+        name = (event.tool_use or {}).get("name")
+        if name != "audit_page":
+            return                      # ranking links and checking a quote cost nothing
+        url = ((event.tool_use or {}).get("input") or {}).get("url", "")
+        motif = self.budget.decide(url)
+        if motif:
+            self.refused.append(url)
+            event.cancel_tool = motif
 
 
 SYSTEM = """You read an offer the way a careful person would if they had time.
@@ -184,8 +226,14 @@ def main(argv=None) -> int:
     # that can be decided without judgement should not be left to judgement.
     first = audit_page(a.url)
 
+    # The starting page is spent from the budget before the agent runs, because
+    # it has already been fetched above. Counting it afterwards would let the
+    # agent read one page more than the caller asked for, silently.
+    budget = Budget(a.max_pages)
+    budget.budget.decide(a.url)
+
     agent = Agent(model=build_model(), tools=[audit_page, find_condition_pages, verify_quote],
-                  system_prompt=SYSTEM, callback_handler=None)
+                  system_prompt=SYSTEM, callback_handler=None, hooks=[budget])
     task = ("Tell me what I would actually be agreeing to at %s\n\n"
             "The audit of that page is already done, here it is.\n%s\n\n"
             "Budget, at most %d pages in total including this one. Now look for its "
@@ -200,6 +248,8 @@ def main(argv=None) -> int:
     pages = {u: v["doc"].flat for u, v in _SEEN.items()}
     checks = guard.check(answer, pages)
     print(guard.annotate(answer, checks))
+    print("\n%s. %d tool call(s) refused by the budget."
+          % (budget.budget.summary(), len(budget.refused)))
     return 1 if any(c.status == "unsupported" for c in checks) else 0
 
 
