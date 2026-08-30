@@ -1,0 +1,527 @@
+{
+ "note": "Held out set. Pages never read while writing the detection rules. Labels produced by two targeted extractors that share no code with the auditor.",
+ "collected": "2026-08-30",
+ "seed": 20260830,
+ "cases": [
+  {
+   "url": "https://solcha-24-idea-thon.devpost.com/",
+   "title": "SolCha '24: IDEATHON",
+   "prize": 13500,
+   "labels": {
+    "prize_is_not_cash": false,
+    "students_only": false
+   },
+   "evidence": {
+    "disclaimer_hits": 0,
+    "eligibility_card": "Above legal age of majority in country of residence Team required: 2 to 4 members All countries/territories, excluding standard exceptions View full rules View "
+   }
+  },
+  {
+   "url": "https://diffusion2019.devpost.com/",
+   "title": "Diffusion 2019",
+   "prize": 26200,
+   "labels": {
+    "prize_is_not_cash": false,
+    "students_only": false
+   },
+   "evidence": {
+    "disclaimer_hits": 0,
+    "eligibility_card": ""
+   }
+  },
+  {
+   "url": "https://la-hacks.devpost.com/",
+   "title": "LA Hacks 2019",
+   "prize": 17250,
+   "labels": {
+    "prize_is_not_cash": false,
+    "students_only": false
+   },
+   "evidence": {
+    "disclaimer_hits": 0,
+    "eligibility_card": ""
+   }
+  },
+  {
+   "url": "https://techacks.devpost.com/",
+   "title": "TecHacks",
+   "prize": 8216,
+   "labels": {
+    "prize_is_not_cash": false,
+    "students_only": false
+   },
+   "evidence": {
+    "disclaimer_hits": 0,
+    "eligibility_card": ""
+   }
+  },
+  {
+   "url": "https://stemist-hacks-2.devpost.com/",
+   "title": "STEMist Hacks II",
+   "prize": 235568,
+   "labels": {
+    "prize_is_not_cash": false,
+    "students_only": true
+   },
+   "evidence": {
+    "disclaimer_hits": 0,
+    "eligibility_card": "Ages 13+ only Students only All countries/territories, excluding standard exceptions View full rules View schedule Jul 21 – 23, 2023 Online Public $ 235,568 in "
+   }
+  },
+  {
+   "url": "https://empower-hacks.devpost.com/",
+   "title": "Empower Hacks",
+   "prize": 112750,
+   "labels": {
+    "prize_is_not_cash": false,
+    "students_only": false
+   },
+   "evidence": {
+    "disclaimer_hits": 0,
+    "eligibility_card": "Ages 13+ only All countries/territories, excluding standard exceptions View full rules View schedule Aug 18 – 21, 2023 Online Public $ 112,750 in prizes 621 par"
+   }
+  },
+  {
+   "url": "https://girls-in-tech-hackathon.devpost.com/",
+   "title": "Girls in Tech Virtual Hackathon",
+   "prize": 30700,
+   "labels": {
+    "prize_is_not_cash": false,
+    "students_only": false
+   },
+   "evidence": {
+    "disclaimer_hits": 0,
+    "eligibility_card": ""
+   }
+  },
+  {
+   "url": "https://hackcwru-6.devpost.com/",
+   "title": "HackCWRU 6",
+   "prize": 8748,
+   "labels": {
+    "prize_is_not_cash": false,
+    "students_only": false
+   },
+   "evidence": {
+    "disclaimer_hits": 0,
+    "eligibility_card": ""
+   }
+  },
+  {
+   "url": "https://hackanywhere.devpost.com/",
+   "title": "Hack Anywhere",
+   "prize": 1789,
+   "labels": {
+    "prize_is_not_cash": false,
+    "students_only": false
+   },
+   "evidence": {
+    "disclaimer_hits": 0,
+    "eligibility_card": ""
+   }
+  },
+  {
+   "url": "https://codered-exploration.devpost.com/",
+   "title": "CodeRED Exploration",
+   "prize": 5554,
+   "labels": {
+    "prize_is_not_cash": false,
+    "students_only": false
+   },
+   "evidence": {
+    "disclaimer_hits": 0,
+    "eligibility_card": ""
+   }
+  },
+  {
+   "url": "https://dash-2017.devpost.com/",
+   "title": "Dash 2017",
+   "prize": 6000,
+   "labels": {
+    "prize_is_not_cash": false,
+    "students_only": false
+   },
+   "evidence": {
+    "disclaimer_hits": 0,
+    "eligibility_card": ""
+   }
+  },
+  {
+   "url": "https://hamp-hack-2017.devpost.com/",
+   "title": "Hamp Hack 2017",
+   "prize": 20912,
+   "labels": {
+    "prize_is_not_cash": false,
+    "students_only": false
+   },
+   "evidence": {
+    "disclaimer_hits": 0,
+    "eligibility_card": ""
+   }
+  },
+  {
+   "url": "https://iothackday2016.devpost.com/",
+   "title": "IoT Hack Day 2016",
+   "prize": 1600,
+   "labels": {
+    "prize_is_not_cash": false,
+    "students_only": false
+   },
+   "evidence": {
+    "disclaimer_hits": 0,
+    "eligibility_card": ""
+   }
+  },
+  {
+   "url": "https://carlhacks2016.devpost.com/",
+   "title": "CarlHacks 2016",
+   "prize": 730,
+   "labels": {
+    "prize_is_not_cash": false,
+    "students_only": false
+   },
+   "evidence": {
+    "disclaimer_hits": 0,
+    "eligibility_card": ""
+   }
+  },
+  {
+   "url": "https://tamuhack2015.devpost.com/",
+   "title": "TAMUHack",
+   "prize": 2940,
+   "labels": {
+    "prize_is_not_cash": false,
+    "students_only": false
+   },
+   "evidence": {
+    "disclaimer_hits": 0,
+    "eligibility_card": ""
+   }
+  },
+  {
+   "url": "https://hackpr2015.devpost.com/",
+   "title": "HackPR F15",
+   "prize": 2750,
+   "labels": {
+    "prize_is_not_cash": false,
+    "students_only": false
+   },
+   "evidence": {
+    "disclaimer_hits": 0,
+    "eligibility_card": ""
+   }
+  },
+  {
+   "url": "https://ramhacks.devpost.com/",
+   "title": "RamHacks",
+   "prize": 1530,
+   "labels": {
+    "prize_is_not_cash": false,
+    "students_only": false
+   },
+   "evidence": {
+    "disclaimer_hits": 0,
+    "eligibility_card": ""
+   }
+  },
+  {
+   "url": "https://ambitious-apps.devpost.com/",
+   "title": "Ambitious Apps at Amazing Scale! A Hackathon for Apache Geode (incubating)",
+   "prize": 1342,
+   "labels": {
+    "prize_is_not_cash": false,
+    "students_only": false
+   },
+   "evidence": {
+    "disclaimer_hits": 0,
+    "eligibility_card": ""
+   }
+  },
+  {
+   "url": "https://metaarhackathoninsf.devpost.com/",
+   "title": "Meta Augmented Reality Hackathon in San Francisco March 6th-7th 2015",
+   "prize": 12150,
+   "labels": {
+    "prize_is_not_cash": false,
+    "students_only": false
+   },
+   "evidence": {
+    "disclaimer_hits": 0,
+    "eligibility_card": ""
+   }
+  },
+  {
+   "url": "https://leadingagehackfest.devpost.com/",
+   "title": "2014 LeadingAge HackFest",
+   "prize": 10000,
+   "labels": {
+    "prize_is_not_cash": false,
+    "students_only": false
+   },
+   "evidence": {
+    "disclaimer_hits": 0,
+    "eligibility_card": ""
+   }
+  },
+  {
+   "url": "https://c3-hackathon.devpost.com/",
+   "title": "C3! Code, Collaborate, Create - Hackathon @ U of T",
+   "prize": 850,
+   "labels": {
+    "prize_is_not_cash": false,
+    "students_only": false
+   },
+   "evidence": {
+    "disclaimer_hits": 0,
+    "eligibility_card": ""
+   }
+  },
+  {
+   "url": "https://kentstatelaunchpad.devpost.com/",
+   "title": "Fashion/Tech Hackathon",
+   "prize": 3000,
+   "labels": {
+    "prize_is_not_cash": false,
+    "students_only": false
+   },
+   "evidence": {
+    "disclaimer_hits": 0,
+    "eligibility_card": ""
+   }
+  },
+  {
+   "url": "https://combatfeedinghack.devpost.com/",
+   "title": "Hackathon for Combat Feeding Mobile Apps",
+   "prize": 6000,
+   "labels": {
+    "prize_is_not_cash": false,
+    "students_only": false
+   },
+   "evidence": {
+    "disclaimer_hits": 0,
+    "eligibility_card": ""
+   }
+  },
+  {
+   "url": "https://minimedi.devpost.com/",
+   "title": "MiniMedi 2024 by MediHacks (Cash Prizes)",
+   "prize": 4350,
+   "labels": {
+    "prize_is_not_cash": false,
+    "students_only": false
+   },
+   "evidence": {
+    "disclaimer_hits": 0,
+    "eligibility_card": "Ages 13+ only All countries/territories, excluding standard exceptions View full rules View schedule Dec 20 – 24, 2024 Online Public $ 4,350 in prizes 327 parti"
+   }
+  },
+  {
+   "url": "https://hack3.devpost.com/",
+   "title": "Hack3 (2020)",
+   "prize": 50000,
+   "labels": {
+    "prize_is_not_cash": false,
+    "students_only": false
+   },
+   "evidence": {
+    "disclaimer_hits": 0,
+    "eligibility_card": ""
+   }
+  },
+  {
+   "url": "https://hackcuv.devpost.com/",
+   "title": "HackCU Episode V",
+   "prize": 7500,
+   "labels": {
+    "prize_is_not_cash": false,
+    "students_only": false
+   },
+   "evidence": {
+    "disclaimer_hits": 0,
+    "eligibility_card": ""
+   }
+  },
+  {
+   "url": "https://treehacks-2016.devpost.com/",
+   "title": "TreeHacks 2016",
+   "prize": 27620,
+   "labels": {
+    "prize_is_not_cash": false,
+    "students_only": false
+   },
+   "evidence": {
+    "disclaimer_hits": 0,
+    "eligibility_card": ""
+   }
+  },
+  {
+   "url": "https://girls-code-canada.devpost.com/",
+   "title": "Girls Code Canada",
+   "prize": 140194,
+   "labels": {
+    "prize_is_not_cash": false,
+    "students_only": false
+   },
+   "evidence": {
+    "disclaimer_hits": 0,
+    "eligibility_card": ""
+   }
+  },
+  {
+   "url": "https://ezhacks.devpost.com/",
+   "title": "EZHacks",
+   "prize": 1200,
+   "labels": {
+    "prize_is_not_cash": false,
+    "students_only": false
+   },
+   "evidence": {
+    "disclaimer_hits": 0,
+    "eligibility_card": ""
+   }
+  },
+  {
+   "url": "https://aws-box-hack2025.devpost.com/",
+   "title": "AWS- Box: content.to_context()",
+   "prize": 2000,
+   "labels": {
+    "prize_is_not_cash": false,
+    "students_only": false
+   },
+   "evidence": {
+    "disclaimer_hits": 0,
+    "eligibility_card": "Ages 17+ only Team required: 2 to 4 members US only View full rules View schedule Nov 20, 2025 Amazon-SJC 18 Public $ 2,000 in cash 14 participants AWS Design D"
+   }
+  },
+  {
+   "url": "https://ignite-phase1.devpost.com/",
+   "title": "IGNITE - 2.0 ",
+   "prize": 100000,
+   "labels": {
+    "prize_is_not_cash": false,
+    "students_only": false
+   },
+   "evidence": {
+    "disclaimer_hits": 0,
+    "eligibility_card": "Ages 16+ only Team required: 2 to 4 members Only specific countries/territories included View full rules View schedule Sep 28 – 29, 2025 Jaipur Public ₹ 100,000"
+   }
+  },
+  {
+   "url": "https://iwd-yeg-2025-redefine-possible.devpost.com/",
+   "title": "IWD 2025: Redefine Possible Edmonton",
+   "prize": 600,
+   "labels": {
+    "prize_is_not_cash": false,
+    "students_only": false
+   },
+   "evidence": {
+    "disclaimer_hits": 0,
+    "eligibility_card": "Above legal age of majority in country of residence Only specific countries/territories included View full rules View schedule Mar 29 – 31, 2025 Edmonton Unlimi"
+   }
+  },
+  {
+   "url": "https://ml-empowerment-2.devpost.com/",
+   "title": "ML Empowerment Build Challenge 2.0",
+   "prize": 91565,
+   "labels": {
+    "prize_is_not_cash": false,
+    "students_only": true
+   },
+   "evidence": {
+    "disclaimer_hits": 0,
+    "eligibility_card": "Above legal age of majority in country of residence Students only Companies/professional organizations excluded from participation All countries/territories, ex"
+   }
+  },
+  {
+   "url": "https://unitedhacksv6.devpost.com/",
+   "title": "United Hacks V6",
+   "prize": 37100,
+   "labels": {
+    "prize_is_not_cash": false,
+    "students_only": false
+   },
+   "evidence": {
+    "disclaimer_hits": 0,
+    "eligibility_card": "Above legal age of majority in country of residence All countries/territories, excluding standard exceptions View full rules View schedule Jan 16 – 18, 2026 Onl"
+   }
+  },
+  {
+   "url": "https://medhacks.devpost.com/",
+   "title": "MedHacks Season 2",
+   "prize": 14000,
+   "labels": {
+    "prize_is_not_cash": false,
+    "students_only": true
+   },
+   "evidence": {
+    "disclaimer_hits": 0,
+    "eligibility_card": "Above legal age of majority in country of residence Students only All countries/territories, excluding standard exceptions View full rules View schedule May 21 "
+   }
+  },
+  {
+   "url": "https://xrplnft.devpost.com/",
+   "title": "XRPL Hackathon: NFT Launch Party",
+   "prize": 50000,
+   "labels": {
+    "prize_is_not_cash": false,
+    "students_only": false
+   },
+   "evidence": {
+    "disclaimer_hits": 0,
+    "eligibility_card": "Above legal age of majority in country of residence All countries/territories, excluding standard exceptions View full rules View schedule Nov 7 – Dec 12, 2022 "
+   }
+  },
+  {
+   "url": "https://cal-hacks-11-0.devpost.com/",
+   "title": "Cal Hacks 11.0",
+   "prize": 188960,
+   "labels": {
+    "prize_is_not_cash": false,
+    "students_only": true
+   },
+   "evidence": {
+    "disclaimer_hits": 0,
+    "eligibility_card": "Ages 18+ only College students only Team required All countries/territories, excluding standard exceptions View full rules View schedule Oct 19 – 20, 2024 City "
+   }
+  },
+  {
+   "url": "https://ably.devpost.com/",
+   "title": "Ably Realtime Experiences Hackathon",
+   "prize": 19000,
+   "labels": {
+    "prize_is_not_cash": false,
+    "students_only": false
+   },
+   "evidence": {
+    "disclaimer_hits": 0,
+    "eligibility_card": "Above legal age of majority in country of residence All countries/territories, excluding standard exceptions View full rules View schedule Sep 18 – Nov 1, 2023 "
+   }
+  },
+  {
+   "url": "https://mlh-local-hack-day-2018.devpost.com/",
+   "title": "MLH Local Hack Day (2018)",
+   "prize": 1500,
+   "labels": {
+    "prize_is_not_cash": false,
+    "students_only": false
+   },
+   "evidence": {
+    "disclaimer_hits": 0,
+    "eligibility_card": ""
+   }
+  },
+  {
+   "url": "https://proto-thon-26.devpost.com/",
+   "title": "PROTO-THON'26",
+   "prize": 100000,
+   "labels": {
+    "prize_is_not_cash": false,
+    "students_only": false
+   },
+   "evidence": {
+    "disclaimer_hits": 0,
+    "eligibility_card": "Above legal age of majority in country of residence Team required: 2 to 5 members All countries/territories, excluding standard exceptions View full rules View "
+   }
+  }
+ ]
+}

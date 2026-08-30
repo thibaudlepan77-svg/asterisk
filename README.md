@@ -1,0 +1,233 @@
+# Asterisk
+
+**Read the asterisk before you read the promise.**
+
+Asterisk takes a web page and reports two things.
+
+1. **Contradictions.** Where the page announces something loudly and takes it
+   back quietly, somewhere else on the same page.
+2. **Quiet conditions.** What the page requires of you without ever promising
+   otherwise, so no contradiction detector would catch it.
+
+Every line it prints is a verbatim quote from the page. A finding that cannot
+be pointed at is dropped before you see it.
+
+MIT licensed. Runs on Nebius Token Factory with an NVIDIA Nemotron model, and
+on any other OpenAI compatible endpoint by changing two environment variables.
+
+---
+
+## Why it exists
+
+On 30 August 2026 I was comparing open online contests, ranking them by prize
+divided by number of entrants, looking for the best place to spend a month of
+work. One entry topped the ranking by a wide margin. It advertised
+
+> **$149,525 in prizes**
+
+and its machine readable listing declared **five cash prizes**. Five hundred
+and twelve people had registered. On paper it was the best opportunity on the
+board by a factor of five.
+
+Its own prize section says, fifteen times, under every single tier
+
+> ⚠️ THIS IS NOT A CASH PRIZE. This award consists of sponsor-provided product
+> credits, subscriptions, software licenses, domains, or other non-cash
+> benefits and cannot be exchanged or redeemed for cash.
+
+The real cash was zero. The number I was ranking on had been typed in by the
+person who benefits from it being large, and the page contradicted it in plain
+sight, in the one place the law forces an advertiser to tell the truth.
+
+Then it got worse. I read the long legal rules of twenty two contests by hand
+and published a figure, twelve of them open to an adult in my country. When I
+pointed the first working build of this tool at the same twenty two pages, it
+came back with `Students only` on pages I had cleared myself three hours
+earlier. The real number was eight, not twelve. **The tool's first useful act
+was to correct its own author.**
+
+That is the problem. Not fraud, and usually not even a lie. A number in one
+place and its cancellation in another, with a scroll bar in between.
+
+---
+
+## What it does, on a real page
+
+```
+$ python cli.py https://gibc-v2.devpost.com/
+
+13 prominent claims checked. 3 contradictions, 6 quiet conditions.
+Verdict, the page contradicts its own headline
+
+CONTRADICTIONS, where the page takes back what it announced
+
+1. [CRITICAL] The page calls the sum cash and then says it is not.
+   found by   deterministic rule
+   PROMISE    ... Online Public $149,525 in cash 513 participants ...
+   FINE PRINT This award consists of sponsor-provided product credits,
+              subscriptions, software licenses, domains, or other non-cash
+              benefits and cannot be exchanged or redeemed for cash.
+
+QUIET CONDITIONS, nothing on the page promised otherwise, and they still bind you
+
+1. [HIGH] Entry is reserved to students, so a professional cannot take part.
+   QUOTED     Ages 13+ only Students only Companies/professional organizations
+              excluded from participation
+```
+
+---
+
+## How it works
+
+Four stages. The interesting decisions are in the middle two, and both of them
+came from a measurement that said the first design was wrong.
+
+**1. Segment** (`asterisk/segment.py`). The page is cut into lines and each
+line is scored for prominence from its tag, its nesting depth relative to the
+rest of the page, and its position. Two things had to be learned on real
+pages. Modern markup shatters a sentence, so `$`, `149,525` and `in cash`
+arrive as three sibling elements and any matcher that keeps them apart finds
+nothing at all. And real pages nest twelve to sixteen levels deep, so a
+prominence score that divides by absolute depth collapses to zero everywhere.
+
+**2. Sentences** (`asterisk/sentences.py`). The first design compared a loud
+block with a quiet block. It scored zero on live pages, because the clause
+that cancels a promise is very often in the **same** block, two sentences
+later. The unit that carries a contradiction is the sentence.
+
+**3. Detect** (`asterisk/audit.py`, `asterisk/restrictions.py`). Two layers.
+
+- A deterministic layer with no model at all. Consumer law imposes the exact
+  wording of the disclaimers that matter, so they can be matched exactly. It
+  is free, instant, and it invents nothing.
+- A model layer for everything the formulas miss, because most of the world's
+  fine print was never standardised. This is where Nemotron reads a claim
+  against candidate passages and judges whether one cancels the other.
+
+**4. Ground** (`Document.contains`). The gate the model cannot argue with.
+Any quote the model returns is checked, character for character, against the
+page. If it is not there, the finding is discarded and never reaches the
+report. This is the only defence against a confident summary of something the
+page never said.
+
+---
+
+## Results
+
+Two evaluations. Both run from this repository, both on live pages, and the
+labels for both are checkable by anyone who opens the page.
+
+### Development set, 22 pages the rules were written against
+
+| label | precision | recall | F1 |
+|---|---|---|---|
+| prize is not cash | 0.75 | 1.00 | 0.86 |
+| reserved to students | 1.00 | 1.00 | 1.00 |
+
+```
+python eval/run_eval.py --offline --show-errors
+```
+
+The single false positive is a page whose main prize is real cash and whose
+side prize is cloud credits. The tool quoted `AWS Promotional Credits are not
+redeemable for cash`, which is true and worth knowing. The label is binary and
+the page is not. That is a limit of the label, and it is left in the table
+rather than tuned away.
+
+### Held out set, 40 pages never read while writing the rules
+
+Drawn at random from a pool of 13,632 finished contests, labelled by two
+targeted extractors that share no code with the auditor.
+
+| label | result |
+|---|---|
+| reserved to students | precision 1.00, recall 1.00, on 4 positives and 36 negatives |
+| prize is not cash | no positive case in this set, 0 false alarms on 40 pages |
+
+```
+python eval/build_holdout.py 40      # draws a fresh random sample and labels it
+python eval/run_eval.py --holdout --offline
+```
+
+Two honest remarks about that table.
+
+The students rule was **tightened because of this set**, not before it. The
+first version matched a bare `currently enrolled` and fired on a page that used
+the phrase to invite school pupils to write in, not to exclude anyone. A
+restriction has to be phrased as a restriction. That one false positive is the
+only thing the held out set changed, and it is worth more than the score.
+
+The second row is not a score, it is a silence, and the difference matters. No
+page in the held out set carries the non-cash disclaimer, so the row can only
+tell you the detector does not cry wolf. It is also a hint worth a sentence.
+Three of the twenty two contests running **today** carry that disclaimer, and
+none of the forty finished ones drawn across the platform's whole history do.
+That looks like a recent practice. With three cases it is a hypothesis, not a
+finding, and it is written here as one.
+
+---
+
+## Install and run
+
+No dependencies beyond the Python standard library for the deterministic path.
+
+```bash
+git clone <this repo>
+cd asterisk
+python cli.py --offline https://example.com/offer     # rules only, no API call
+```
+
+For the model layer, point it at Nebius Token Factory.
+
+```bash
+export ASTERISK_API_KEY=...                                    # your Nebius key
+export ASTERISK_BASE_URL=https://api.tokenfactory.nebius.com/v1
+export ASTERISK_MODEL=nvidia/NVIDIA-Nemotron-3-Super
+python cli.py https://example.com/offer
+```
+
+Any OpenAI compatible endpoint works, the code knows no vendor beyond those
+two variables. Pages are cached on disk so that iterating on prompts does not
+hammer somebody's site.
+
+```
+python cli.py --json URL          machine readable output
+python cli.py --offline URL       deterministic layer only
+python cli.py --loudness 0.4 URL  check less prominent claims too
+python cli.py file.html           audit a saved page
+```
+
+Exit code is 1 when a critical or high contradiction is found, so it drops
+into a shell pipeline or a CI check without extra glue.
+
+---
+
+## What it does not do, stated plainly
+
+- **It is not a lie detector.** It finds a promise and a clause that disagree.
+  Deciding whether that is deception, a legal necessity, or sloppy copywriting
+  is the reader's job, and the tool gives them the two quotes to do it with.
+- **It reads one page.** A condition kept on a separate terms page, behind a
+  login, or rendered only by client side script is invisible to it today.
+- **The deterministic layer is English first.** The legal formulas it matches
+  are the English ones. The model layer is not language bound, the rules are.
+- **The development set is small and specialised.** Twenty two contest pages.
+  The held out set widens it, and neither is a survey of the web.
+- **A false negative is silent.** The tool proves that something is on the
+  page. It never proves that nothing else is.
+
+---
+
+## Layout
+
+```
+asterisk/segment.py       page to prominence scored lines
+asterisk/sentences.py     lines to quotable sentences
+asterisk/claims.py        the promises worth checking
+asterisk/audit.py         contradictions, rules and model, with the grounding gate
+asterisk/restrictions.py  quiet conditions that no headline contradicts
+asterisk/report.py        text and JSON output
+asterisk/llm.py           any OpenAI compatible endpoint
+eval/                     labelled pages, scorer, held out set builder
+cli.py                    entry point
+```
