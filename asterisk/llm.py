@@ -47,7 +47,15 @@ def chat(messages: list[dict], *, model: str | None = None, temperature: float =
     req = urllib.request.Request(
         DEFAULT_BASE.rstrip("/") + "/chat/completions",
         data=body,
-        headers={"Content-Type": "application/json", "Authorization": f"Bearer {api_key()}"},
+        headers={
+            "Content-Type": "application/json",
+            "Authorization": f"Bearer {api_key()}",
+            # Some providers sit behind a bot filter that rejects a request with
+            # no browser-like agent, and answers 403 error code 1010 rather than
+            # anything about authentication. Cost one debugging round.
+            "User-Agent": "asterisk/0.1 (+https://github.com/) python-urllib",
+            "Accept": "application/json",
+        },
     )
     last = None
     for attempt in range(retries):

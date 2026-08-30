@@ -174,6 +174,64 @@ finding, and it is written here as one.
 
 ---
 
+## The agent, and the failure that shaped it
+
+`cli.py` reads one page. That is not enough, and pretending otherwise is the
+dangerous part. The clause that costs you is usually not on the offer page, it
+is behind a small grey link, and a one page auditor that answers "nothing
+found" on such an offer is worse than useless because it reassures.
+
+`agent.py` is built on the **Strands Agents SDK**. It audits the offer, ranks
+the links that could hold binding conditions, follows the ones worth a request
+inside a page budget, and stops when another page would add nothing.
+
+```bash
+pip install strands-agents openai
+export ASTERISK_API_KEY=...
+export ASTERISK_BASE_URL=https://api.tokenfactory.nebius.com/v1
+export ASTERISK_MODEL=nvidia/NVIDIA-Nemotron-3-Super
+python agent.py https://example.com/offer --max-pages 4
+```
+
+Two things in that loop were built after watching it fail.
+
+**The first audit is not the agent's decision.** In the first build the model
+was told to audit the starting page and then look further. It went straight to
+the linked pages, found them clean, and reported that a page carrying three
+contradictions had none. So the starting audit now runs deterministically and
+its result is handed to the model. Anything that can be decided without
+judgement should not be left to judgement.
+
+**A tool that lets a model attest to its own output has verified nothing.**
+The agent had a `verify_quote` tool. It called it. Its answer still read
+
+> sponsor-provided product credits, subscriptions, software **licences**
+
+where the page says `licenses`, and turned `organizations` into
+`organisations`, with every line labelled verified. The model had checked the
+real string and then written a tidied one, because tidying prose is what a
+language model does.
+
+So verification moved to where it cannot be talked around. `asterisk/guard.py`
+runs **after the last token**, on the text the reader will see. It pulls every
+quoted span out of the answer and looks it up in the pages that were actually
+fetched.
+
+```
+[grounding] 3 quotes checked against the fetched pages, 2 exact, 1 altered, 0 unsupported.
+  ALTERED   the answer wrote
+            software licences, domains, or other non-cash benefits
+            the page says
+            software licenses, domains, or other non-cash benefits
+```
+
+An answer containing an unsupported quote exits non zero. The four tests in
+`tests_asterisk.py` under `OutputGrounding` are witness tests, they feed the
+guard a respelled quote and an invented one and require it to refuse both. A
+gate that has never refused anything proves nothing.
+
+---
+
 ## Install and run
 
 No dependencies beyond the Python standard library for the deterministic path.
@@ -233,8 +291,12 @@ asterisk/sentences.py     lines to quotable sentences
 asterisk/claims.py        the promises worth checking
 asterisk/audit.py         contradictions, rules and model, with the grounding gate
 asterisk/restrictions.py  quiet conditions that no headline contradicts
+asterisk/links.py         which links could hold a binding clause, ranked
+asterisk/guard.py         verifies the quotes in the FINAL answer, after the model
 asterisk/report.py        text and JSON output
 asterisk/llm.py           any OpenAI compatible endpoint
 eval/                     labelled pages, scorer, held out set builder
-cli.py                    entry point
+cli.py                    one page, deterministic entry point
+agent.py                  multi page agent on the Strands Agents SDK
+tests_asterisk.py         regression and witness tests, 12 of them
 ```

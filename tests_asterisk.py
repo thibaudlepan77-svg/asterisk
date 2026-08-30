@@ -72,5 +72,42 @@ class Grounding(unittest.TestCase):
         self.assertTrue(doc.contains("We deliver in thirty days"))
 
 
+
+
+class OutputGrounding(unittest.TestCase):
+    """Witness tests. A gate that has never refused anything proves nothing."""
+
+    PAGE = {"http://x": ("This award consists of sponsor-provided product credits, "
+                         "subscriptions, software licenses, domains, or other non-cash "
+                         "benefits and cannot be exchanged or redeemed for cash.")}
+
+    def test_exact_quote_passes(self):
+        from asterisk import guard
+        a = 'The page says "software licenses, domains, or other non-cash benefits".'
+        c = guard.check(a, self.PAGE)
+        self.assertEqual([x.status for x in c], ["exact"])
+
+    def test_british_respelling_is_caught(self):
+        """The real failure. The model tidied licenses into licences and called it verified."""
+        from asterisk import guard
+        a = 'The page says "software licences, domains, or other non-cash benefits".'
+        c = guard.check(a, self.PAGE)
+        self.assertEqual(c[0].status, "altered")
+        self.assertIn("licenses", c[0].actual)
+
+    def test_invented_quote_is_refused(self):
+        from asterisk import guard
+        a = 'The page says "winners are paid in cash within seven days by bank transfer".'
+        c = guard.check(a, self.PAGE)
+        self.assertEqual(c[0].status, "unsupported")
+
+    def test_annotation_names_the_true_wording(self):
+        from asterisk import guard
+        a = 'The page says "software licences, domains, or other non-cash benefits".'
+        txt = guard.annotate(a, guard.check(a, self.PAGE))
+        self.assertIn("ALTERED", txt)
+        self.assertIn("the page says", txt)
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
