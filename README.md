@@ -56,7 +56,7 @@ place and its cancellation in another, with a scroll bar in between.
 ```
 $ python cli.py https://gibc-v2.devpost.com/
 
-13 prominent claims checked. 3 contradictions, 6 quiet conditions.
+13 prominent claims checked. 3 contradictions, 0 quiet conditions.
 Verdict, the page contradicts its own headline
 
 CONTRADICTIONS, where the page takes back what it announced
@@ -68,12 +68,19 @@ CONTRADICTIONS, where the page takes back what it announced
               subscriptions, software licenses, domains, or other non-cash
               benefits and cannot be exchanged or redeemed for cash.
 
-QUIET CONDITIONS, nothing on the page promised otherwise, and they still bind you
-
-1. [HIGH] Entry is reserved to students, so a professional cannot take part.
-   QUOTED     Ages 13+ only Students only Companies/professional organizations
+3. [HIGH] Open to all is announced and a residency or status condition is set
+   elsewhere.
+   found by   deterministic rule
+   PROMISE    GIBC V1 brought together 552 participants worldwide with backing
+              from sponsors including NordVPN.
+   FINE PRINT Ages 13+ only Students only Companies/professional organizations
               excluded from participation
 ```
+
+The count of quiet conditions is zero here on purpose. The students clause was
+already reported above as a contradiction, because this page does claim to be
+worldwide, so reporting it twice would pad the output. Quiet conditions are for
+what nothing on the page contradicts.
 
 ---
 
