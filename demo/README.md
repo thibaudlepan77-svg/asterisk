@@ -8,8 +8,13 @@ pip install gradio
 python demo/app.py
 ```
 
-**Status, written the day it was created.** The file parses and it calls only
-functions that are covered by the test suite, but **the server has not been
-started and the interface has not been seen running.** That is stated here
-rather than implied, because this repository is a tool about claims that a page
-does not back up, and it would be a poor joke to make one.
+**Status, written the day it was created.** The audit logic was moved out of
+this file into `asterisk/service.py`, precisely so that the part that does the
+work can be tested without starting a server, and it is, in
+`tests_asterisk.py` under `Service`. What remains here is the Gradio shell,
+about thirty lines of layout.
+
+**The server itself has still not been started**, so the layout has not been
+seen rendered. That is stated rather than implied, because this repository is a
+tool about claims a page does not back up and it would be a poor joke to make
+one.

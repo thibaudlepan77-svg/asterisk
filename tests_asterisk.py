@@ -259,5 +259,34 @@ class HtmlReport(unittest.TestCase):
         self.assertIn("not a failure", out)
 
 
+class Service(unittest.TestCase):
+    """The call the front end makes, tested without starting a server."""
+
+    def test_a_bad_address_is_refused_before_any_request(self):
+        from asterisk.service import audit_url
+        r = audit_url("not a url")
+        self.assertFalse(r["ok"])
+        self.assertIn("full address", r["error"])
+
+    def test_markdown_of_a_failure_leads_with_the_reason(self):
+        from asterisk.service import as_markdown
+        out = as_markdown({"ok": False, "error": "Could not fetch that page."})
+        self.assertTrue(out.startswith("### Could not fetch"))
+
+    def test_markdown_of_a_clean_page_says_it_is_a_result(self):
+        from asterisk.service import as_markdown
+        out = as_markdown({"ok": True, "claims": [], "contradictions": [], "restrictions": []})
+        self.assertIn("not a failure", out)
+
+    def test_markdown_shows_both_halves_of_a_contradiction(self):
+        from asterisk.service import as_markdown
+        out = as_markdown({"ok": True, "claims": [], "restrictions": [], "contradictions": [
+            {"severity": "critical", "explanation": "it says two things",
+             "claim": "win money", "counter": "not a cash prize", "distance": 0.3}]})
+        self.assertIn("win money", out)
+        self.assertIn("not a cash prize", out)
+        self.assertIn("30 %", out)
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
