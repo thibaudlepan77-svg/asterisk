@@ -27,8 +27,10 @@ from strands import Agent, tool                     # noqa: E402
 from strands.models.openai import OpenAIModel       # noqa: E402
 
 from asterisk import fetch, links, guard            # noqa: E402
-from asterisk.audit import audit                    # noqa: E402
+from asterisk.audit import audit, _relevant         # noqa: E402
+from asterisk.claims import extract                 # noqa: E402
 from asterisk.segment import segment                # noqa: E402
+from asterisk.sentences import sentences            # noqa: E402
 
 _SEEN: dict[str, dict] = {}
 
@@ -37,8 +39,10 @@ _SEEN: dict[str, dict] = {}
 def audit_page(url: str) -> str:
     """Audit one page for contradictions and quiet conditions.
 
-    Returns JSON with the claims checked, the contradictions found, and the
-    quiet conditions found. Every quote is verbatim from that page.
+    Returns the contradictions the deterministic rules found, the quiet
+    conditions, and the promises the rules could NOT settle together with the
+    passages most likely to bear on them. Judge those yourself. Every quote is
+    verbatim from that page.
 
     Args:
         url: absolute URL of the page to audit.
@@ -48,11 +52,34 @@ def audit_page(url: str) -> str:
     except Exception as e:
         return json.dumps({"url": url, "error": "could not fetch, %s" % e})
     doc = segment(html, url)
-    claims, findings = audit(doc, offline=True)     # rules only inside a tool call
+    claims, findings = audit(doc, offline=True)
     _SEEN[url] = {"html": html, "doc": doc}
+
+    # What the rules settled, and what they left open. The second list is the
+    # reason this is a tool for an agent and not a script. The formulas only
+    # cover the wordings that consumer law standardised, and most of the
+    # world's fine print was written by a marketing team instead.
+    settled = {" ".join(f.claim.lower().split()) for f in findings}
+    sents = sentences(doc)
+    unsettled = []
+    for c in claims[:10]:
+        if " ".join((c.context or c.text).lower().split()) in settled:
+            continue
+        unsettled.append({
+            "promise": (c.context or c.text)[:220],
+            "kind": c.kind,
+            "candidate_passages": [s.excerpt(280) for s in _relevant(sents, c, k=4)],
+        })
+    if doc.looks_unreadable():
+        return json.dumps({"url": url, "page_rendered": False,
+                           "warning": "this page returned almost no text, it is drawn by the "
+                                      "browser. Do not report it as clean, say it could not be read."},
+                          ensure_ascii=False)
     return json.dumps({
         "url": url,
+        "page_rendered": True,
         "claims_checked": len(claims),
+        "unsettled_by_rules": unsettled,
         "contradictions": [
             {"severity": f.severity, "why": f.explanation,
              "promise": f.claim[:200], "quote": f.counter[:280]}
@@ -113,10 +140,16 @@ Do not skip it, do not re-run it, and do not answer as if it were empty.
 
 How to work.
 1. Read the audit you were handed. Its findings are part of your answer.
-2. Ask for the condition pages of the starting page. A clean offer page means
+2. Read `unsettled_by_rules`. Those are promises the deterministic rules could
+   not settle, each with the passages most likely to bear on them. Decide
+   yourself whether any passage cancels its promise. Most will not, and saying
+   so is correct. This is the part no pattern can do for you.
+3. Ask for the condition pages of the starting page. A clean offer page means
    nothing on its own, the binding clause is usually one click away. Audit the
    best ranked ones until the picture stops changing or the budget runs out.
-3. Stop early when another page would add nothing. Say so.
+4. Stop early when another page would add nothing. Say so.
+5. If a page reports page_rendered false, say it could not be read. Never
+   report such a page as clean.
 
 How to answer.
 - Lead with the single thing that would change the reader's mind.
