@@ -90,11 +90,29 @@ RESTRICTIONS = [
     # Added the same day, from a page where being selected sends you a bill.
     # A hundred entrants advance, ten are paid, and ninety owe five hundred
     # dollars. The page shows one number, the prize, at the top.
+    # WIDENED ON 2026-08-30 AFTER IT MISSED THE PAGE IT WAS WRITTEN FOR.
+    #
+    # The rule was drafted from one wording and then tried on another page of
+    # the same kind. That page says
+    #
+    #   the remaining 90 selected teams will receive an invitation to Phase II
+    #   and will be responsible for a registration fee and shipping costs
+    #
+    # and it missed three times over. `selected` to `fee` is eighty five
+    # characters and the window was eighty. There is no `fee of`, there is `a
+    # registration fee`. And it says `to receive their`, where the rule had
+    # written `to receive your`.
+    #
+    # **Three near misses in one sentence is not bad luck, it is a rule written
+    # from the cases its author had already seen.** Same failure as the video
+    # detector the same morning. The fix is not a wider window, it is patterns
+    # taken from wordings nobody chose.
     ("advancement costs money",
-     r"((?:selected|advancing|qualifying|finalist|shortlisted)[^.]{0,80}"
-     r"(?:pay a|pays a|fee of|must pay)|"
-     r"(?:remaining|other) \d+ (?:selected )?teams? pay|"
-     r"(?:pay|fee)[^.]{0,60}to (?:advance|proceed|receive your))",
+     r"((?:selected|advancing|qualifying|finalists?|shortlisted|remaining)"
+     r"[^.]{0,140}(?:pay a|pays a|fee of|must pay|responsible for[^.]{0,40}(?:fee|cost)|"
+     r"(?:registration|entry|participation|shipping|kit) (?:fee|cost))|"
+     r"(?:pay|fee|cost)[^.]{0,80}to (?:advance|proceed|continue|"
+     r"receive (?:your|their|the)))",
      "critical", "A good result here costs you money rather than paying you."),
 ]
 

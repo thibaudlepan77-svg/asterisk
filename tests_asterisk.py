@@ -510,5 +510,56 @@ class TheSdkContractTheBudgetRelieson(unittest.TestCase):
         self.assertIn("cancel_tool", getattr(BeforeToolCallEvent, "__annotations__", {}))
 
 
+
+
+class AdvancementCost(unittest.TestCase):
+    """The rule that missed the page it was written for.
+
+    Drafted from one wording, then tried on another page of the same kind and
+    missed three times in a single sentence. The window was eighty characters
+    and the distance was eighty five. There was no `fee of`, there was `a
+    registration fee`. And the page said `to receive their` where the rule had
+    written `to receive your`.
+
+    **Three near misses in one sentence is not bad luck, it is a rule written
+    from the cases its author had already seen.** The positives below are
+    verbatim from real pages, and the negatives include the sentence that says
+    the opposite, because a rule that fires on `no registration fee` would be
+    worse than a rule that misses.
+    """
+
+    def setUp(self):
+        import re
+        from asterisk.restrictions import RESTRICTIONS
+        self.re = re
+        self.pat = dict((n, p) for n, p, _, _ in RESTRICTIONS)["advancement costs money"]
+
+    def _fires(self, txt):
+        return bool(self.re.search(self.pat, txt, self.re.I))
+
+    def test_the_page_it_missed(self):
+        self.assertTrue(self._fires(
+            "the remaining 90 selected teams will receive an invitation to Phase II "
+            "and will be responsible for a registration fee and shipping costs to "
+            "receive their developer kit"))
+
+    def test_the_wording_it_was_written_for_still_fires(self):
+        self.assertTrue(self._fires(
+            "The other 40 selected teams pay a $250 fee to advance to the final round"))
+
+    def test_a_page_saying_there_is_no_fee_stays_silent(self):
+        """The most expensive false positive available, and it must not happen."""
+        self.assertFalse(self._fires(
+            "There is no entry fee and no registration fee to take part in Phase I"))
+
+    def test_a_prize_paid_to_the_winner_is_not_a_cost(self):
+        self.assertFalse(self._fires(
+            "Finalists will each receive a cash prize of five thousand dollars"))
+
+    def test_the_absurd_witness_stays_silent(self):
+        self.assertFalse(self._fires(
+            "The cafeteria serves lunch between eleven and two"))
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
