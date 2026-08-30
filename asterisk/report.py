@@ -62,8 +62,11 @@ def as_text(url: str, claims, findings, width: int = 96, unreadable: bool = Fals
             out.append("")
             out.append("-" * width)
             out.append("%d. [%s] %s" % (i, BADGE.get(f.severity, f.severity.upper()), f.explanation))
-            out.append("   found by   %s" % ("deterministic rule" if f.source == "rule"
-                                             else "model, quote verified against the page"))
+            d = f.distance()
+            loin = ("   %s apart, as a share of the page"
+                    % _pct(d)) if d is not None else ""
+            out.append("   found by   %s%s" % ("deterministic rule" if f.source == "rule"
+                                               else "model, quote verified against the page", loin))
             out.append("   PROMISE    %s" % _wrap(f.claim, width - 14))
             out.append("   FINE PRINT %s" % _wrap(f.counter, width - 14))
 
@@ -86,6 +89,10 @@ def as_text(url: str, claims, findings, width: int = 96, unreadable: bool = Fals
     out.append("-" * width)
     out.append("Every quote above was checked against the page text before printing.")
     return "\n".join(out)
+
+
+def _pct(d: float) -> str:
+    return "%.0f %%" % (100 * d)
 
 
 def _wrap(s: str, width: int) -> str:

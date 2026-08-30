@@ -84,9 +84,24 @@ class Finding:
     kind: str = "contradiction"     # contradiction, or restriction
     claim_offset: int = -1
     counter_offset: int = -1
+    page_length: int = 0
 
     def to_dict(self):
-        return asdict(self)
+        d = asdict(self)
+        d["distance"] = self.distance()
+        return d
+
+    def distance(self):
+        """How far apart the promise and its denial sit, as a share of the page.
+
+        The whole thesis of this tool is that a promise and its cancellation are
+        separated by a scroll bar. That is an assertion until it carries a
+        number, so every finding carries one. None when either side could not be
+        located, which happens when a quote was normalised on the way in.
+        """
+        if self.page_length <= 0 or self.claim_offset < 0 or self.counter_offset < 0:
+            return None
+        return abs(self.counter_offset - self.claim_offset) / float(self.page_length)
 
 
 def _dedupe(findings):
@@ -143,6 +158,7 @@ def by_rules(doc, claims, sents):
                     claim_kind=c.kind, claim=c.context or c.text, counter=s.excerpt(300),
                     severity=sev, explanation=why, source="rule", section=s.section,
                     claim_offset=doc.locate(c.text), counter_offset=doc.locate(m.group(0)),
+                    page_length=len(doc.flat),
                 ))
                 break
     return out
@@ -242,7 +258,7 @@ def by_model(doc, claims, sents, model=None, max_claims: int = 12, verbose: bool
                 severity=str(it.get("severity", "medium")).lower(),
                 explanation=str(it.get("explanation", "")).strip(),
                 source="model", claim_offset=doc.locate(c.text),
-                counter_offset=doc.locate(quote),
+                counter_offset=doc.locate(quote), page_length=len(doc.flat),
             ))
     return out
 
@@ -259,7 +275,7 @@ def by_restrictions(doc, sents):
             claim_kind=r["label"], claim="(the page makes no claim to the contrary)",
             counter=r["quote"], severity=r["severity"], explanation=r["explanation"],
             source="rule", section=r["section"], counter_offset=r["offset"],
-            kind="restriction",
+            page_length=len(doc.flat), kind="restriction",
         ))
     return out
 

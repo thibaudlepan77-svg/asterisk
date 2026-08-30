@@ -150,6 +150,29 @@ page never said.
 Two evaluations. Both run from this repository, both on live pages, and the
 labels for both are checkable by anyone who opens the page.
 
+### The distance, which is the whole thesis with a number on it
+
+The claim this tool is built on is that a promise and the sentence cancelling
+it are separated by a scroll bar. That is an assertion until it carries a
+number, so every finding now reports how far apart the two sit, as a share of
+the page.
+
+Across the 62 pages of both evaluation sets, 17 contradictions could be located
+on both sides.
+
+| | share of the page |
+|---|---|
+| median distance between a promise and its denial | **30 %** |
+| quarter of cases below | 7 % |
+| quarter of cases above | 42 % |
+| furthest apart | 77 % |
+| **close enough to be on screen together**, under 5 % | **4 of 17, 24 %** |
+
+**Three quarters of the time you cannot see both halves at once.** Seventeen is
+a small number and it is written here rather than rounded away, but the
+direction is the point. Nothing is hidden on these pages. It is simply not on
+the same screen.
+
 ### Development set, 22 pages the rules were written against
 
 | label | precision | recall | F1 |

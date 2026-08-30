@@ -219,5 +219,22 @@ class TableNoise(unittest.TestCase):
                                    "then $12.99/month."))
 
 
+class Distance(unittest.TestCase):
+    """The thesis of this tool is a distance, so a finding has to carry it."""
+
+    def test_a_finding_reports_how_far_apart_the_two_halves_are(self):
+        doc = segment(SHATTERED, "test")
+        _, findings = audit(doc, offline=True)
+        d = findings[0].distance()
+        self.assertIsNotNone(d)
+        self.assertTrue(0.0 <= d <= 1.0)
+
+    def test_distance_is_none_when_a_side_cannot_be_located(self):
+        from asterisk.audit import Finding
+        f = Finding(claim_kind="cash", claim="a", counter="b", severity="high",
+                    explanation="x", source="rule")
+        self.assertIsNone(f.distance())
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
