@@ -366,5 +366,7 @@ asterisk/llm.py           any OpenAI compatible endpoint
 eval/                     labelled pages, scorer, held out set builder
 cli.py                    one page, deterministic entry point
 agent.py                  multi page agent on the Strands Agents SDK
-tests_asterisk.py         regression and witness tests, 12 of them
+tests_asterisk.py         regression and witness tests, 15 of them
+docs/architecture.svg     the diagram above, source
+video/make_video.py       builds the demo video from slides and a synthetic voice
 ```
