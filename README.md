@@ -183,6 +183,14 @@ a small number and it is written here rather than rounded away, but the
 direction is the point. Nothing is hidden on these pages. It is simply not on
 the same screen.
 
+**One correction to that thesis, found the same day.** On a contest rulebook,
+the pair that mattered sat **1 % of the page apart**, two paragraphs from each
+other. There is no scroll bar between them. A legal document does not hide
+things by distance, it hides them by length and by sameness of tone, and page
+after page of clauses in the same register is its own kind of cover. The 30 %
+figure describes commercial pages. It says nothing about the documents those
+pages link to.
+
 ### Development set, 22 pages the rules were written against
 
 | label | precision | recall | F1 |
