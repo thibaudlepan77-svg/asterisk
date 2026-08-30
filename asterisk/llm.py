@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
-"""Thin client for any OpenAI-compatible endpoint.
+"""Thin client for any OpenAI compatible endpoint.
 
-Defaults point at Nebius Token Factory with an NVIDIA Nemotron model, which is
-what this project is built for. Nothing else in the codebase knows the vendor,
-so pointing it somewhere else is two environment variables.
+Nothing in this codebase knows a vendor. Two environment variables move it
+anywhere that speaks the chat completions shape, which is most of them.
 """
 from __future__ import annotations
 import json
@@ -12,8 +11,8 @@ import time
 import urllib.error
 import urllib.request
 
-DEFAULT_BASE = os.environ.get("ASTERISK_BASE_URL", "https://api.tokenfactory.nebius.com/v1")
-DEFAULT_MODEL = os.environ.get("ASTERISK_MODEL", "nvidia/NVIDIA-Nemotron-3-Super")
+DEFAULT_BASE = os.environ.get("ASTERISK_BASE_URL", "https://api.openai.com/v1")
+DEFAULT_MODEL = os.environ.get("ASTERISK_MODEL", "gpt-4o-mini")
 KEY_VARS = ("ASTERISK_API_KEY", "NEBIUS_API_KEY", "OPENAI_API_KEY")
 
 

@@ -12,8 +12,11 @@ Asterisk takes a web page and reports two things.
 Every line it prints is a verbatim quote from the page. A finding that cannot
 be pointed at is dropped before you see it.
 
-MIT licensed. Runs on Nebius Token Factory with an NVIDIA Nemotron model, and
-on any other OpenAI compatible endpoint by changing two environment variables.
+MIT licensed. The deterministic half has no dependencies at all. The model half
+speaks the OpenAI chat completions shape, so it runs against any endpoint that
+does, set by two environment variables. It was developed and measured against
+an OpenAI compatible endpoint serving `openai/gpt-oss-120b`, and that is the
+configuration the numbers below come from. Nothing in the code knows a vendor.
 
 ---
 
@@ -108,8 +111,11 @@ later. The unit that carries a contradiction is the sentence.
   wording of the disclaimers that matter, so they can be matched exactly. It
   is free, instant, and it invents nothing.
 - A model layer for everything the formulas miss, because most of the world's
-  fine print was never standardised. This is where Nemotron reads a claim
-  against candidate passages and judges whether one cancels the other.
+  fine print was never standardised. This is where a model reads a claim
+  against candidate passages and judges whether one cancels the other. On the
+  contest page below it is the layer that caught a second denial the rules had
+  no formula for, `THIS COMPETITION DOES NOT HAVE CASH PRIZE` sitting on the
+  same page as `$292 in cash 500 winners`.
 
 **4. Ground** (`Document.contains`). The gate the model cannot argue with.
 Any quote the model returns is checked, character for character, against the
@@ -239,8 +245,8 @@ inside a page budget, and stops when another page would add nothing.
 ```bash
 pip install strands-agents openai
 export ASTERISK_API_KEY=...
-export ASTERISK_BASE_URL=https://api.tokenfactory.nebius.com/v1
-export ASTERISK_MODEL=nvidia/NVIDIA-Nemotron-3-Super
+export ASTERISK_BASE_URL=https://your-provider.example/v1
+export ASTERISK_MODEL=the-model-id
 python agent.py https://example.com/offer --max-pages 4
 ```
 
@@ -293,18 +299,22 @@ cd asterisk
 python cli.py --offline https://example.com/offer     # rules only, no API call
 ```
 
-For the model layer, point it at Nebius Token Factory.
+For the model layer, point it at any OpenAI compatible endpoint.
 
 ```bash
-export ASTERISK_API_KEY=...                                    # your Nebius key
-export ASTERISK_BASE_URL=https://api.tokenfactory.nebius.com/v1
-export ASTERISK_MODEL=nvidia/NVIDIA-Nemotron-3-Super
+export ASTERISK_API_KEY=...
+export ASTERISK_BASE_URL=https://your-provider.example/v1
+export ASTERISK_MODEL=the-model-id
 python cli.py https://example.com/offer
 ```
 
-Any OpenAI compatible endpoint works, the code knows no vendor beyond those
-two variables. Pages are cached on disk so that iterating on prompts does not
-hammer somebody's site.
+Pages are cached on disk so that iterating on prompts does not hammer
+somebody's site.
+
+One portability note that cost a debugging round. Some providers sit behind a
+bot filter that answers **403 with error code 1010** to a request carrying no
+browser like agent, and says nothing about authentication. The client sends a
+`User-Agent` for that reason.
 
 ```
 python cli.py --json URL          machine readable output

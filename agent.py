@@ -128,9 +128,9 @@ How to answer.
 
 
 def build_model():
-    """Any OpenAI compatible endpoint. Nebius Token Factory by default."""
-    base = os.environ.get("ASTERISK_BASE_URL", "https://api.tokenfactory.nebius.com/v1")
-    model = os.environ.get("ASTERISK_MODEL", "nvidia/NVIDIA-Nemotron-3-Super")
+    """Any OpenAI compatible endpoint, set by two environment variables."""
+    base = os.environ.get("ASTERISK_BASE_URL", "https://api.openai.com/v1")
+    model = os.environ.get("ASTERISK_MODEL", "gpt-4o-mini")
     key = (os.environ.get("ASTERISK_API_KEY") or os.environ.get("NEBIUS_API_KEY")
            or os.environ.get("OPENAI_API_KEY"))
     if not key:
