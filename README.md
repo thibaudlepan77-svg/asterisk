@@ -198,6 +198,30 @@ none of the forty finished ones drawn across the platform's whole history do.
 That looks like a recent practice. With three cases it is a hypothesis, not a
 finding, and it is written here as one.
 
+### What the model layer actually adds
+
+Every number above is the deterministic layer alone. A fair question is whether
+the model earns its place, so it was measured on six live pages rather than
+asserted.
+
+| | findings |
+|---|---|
+| deterministic rules alone | 17 |
+| new findings the model added, after filtering | 10 |
+| quotes the grounding gate refused | 1 |
+
+The model earns its place, and not evenly. Its best catch on those six pages is
+a free trial claim answered by `Offer available only to students at an eligible
+accredited higher education institution`, which no formula covers because
+nobody standardised that sentence. Its worst habit was quoting **pricing
+grids** back against price claims, a table that lost its columns in the parser
+and reads like a contradiction to a model and like a table to a person. That
+was fifteen additions before the filter and ten after, so **a third of what the
+model offered was noise of one single kind**.
+
+The grounding gate refused one quote in production, not only in tests. That is
+one invented sentence that never reached a reader.
+
 ### Off its home ground, ten ordinary consumer offers
 
 Everything above is contest pages. The README claimed the method generalises,
