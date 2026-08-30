@@ -231,6 +231,34 @@ none of the forty finished ones drawn across the platform's whole history do.
 That looks like a recent practice. With three cases it is a hypothesis, not a
 finding, and it is written here as one.
 
+### A third domain, and the clearest evidence for the whole design
+
+Contest pages and consumer offers are both marketing pages. So the tool was
+pointed at a third thing, the seller terms of six online selling platforms,
+starting from each one's pricing page.
+
+| where it looked | findings |
+|---|---|
+| seller pricing page, six platforms | **0** |
+| the conditions page, one click from that same page | **4**, on the two that were readable |
+
+A zero on all six pricing pages is not a failure of the detector, it is the
+shape of the thing. A pricing page is a commercial document and it is clean.
+The document that binds you is somewhere else, and it is one link away.
+
+On one platform's terms, quoted verbatim,
+
+> If [the platform] considers that any withholding or deduction on account of
+> tax is required by applicable law to be made from any payment pursuant to
+> this Agreement, it shall be entitled to make such withholding or deduction
+> (and, for the avoidance doubt, shall not be required to increase or gross-up
+> any payment on account of such withholding or deduction).
+
+Nothing on the pricing page suggests that the advertised commission is not the
+only deduction. **This is the measurement that justifies the agent existing at
+all.** A one page auditor answers "nothing found" on all six, which is true and
+useless.
+
 ### What the model layer actually adds
 
 Every number above is the deterministic layer alone. A fair question is whether
