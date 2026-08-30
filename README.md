@@ -195,18 +195,33 @@ pages link to.
 
 | label | precision | recall | F1 |
 |---|---|---|---|
-| prize is not cash | 0.75 | 1.00 | 0.86 |
+| prize is not cash | 1.00 | 1.00 | 1.00 |
 | reserved to students | 1.00 | 1.00 | 1.00 |
 
 ```
 python eval/run_eval.py --offline --show-errors
 ```
 
-The single false positive is a page whose main prize is real cash and whose
-side prize is cloud credits. The tool quoted `AWS Promotional Credits are not
-redeemable for cash`, which is true and worth knowing. The label is binary and
-the page is not. That is a limit of the label, and it is left in the table
-rather than tuned away.
+**This table used to read 0.75 precision on the first label, and the note under
+it was wrong.** The single false positive was a contest paying $12,000 in cash
+whose page also mentions, under a heading about free partner credits, that
+`AWS Promotional Credits are not redeemable for cash`. Both sentences are true
+and neither denies the other. The old note called this a limit of a binary
+label on a page that is not binary, and left it in place rather than tune it
+away. That was the comfortable reading and it was the wrong one.
+
+The real defect was in the tool. The reference label is scoped to the prize
+block, and the detector was reading the whole page. A denial now cancels a
+money promise only when its subject is the award, either because the sentence
+names it or because it sits under a prize heading. The standard legal wording
+carries its own subject, `this is not a cash prize`, `the award consists of`,
+so honest disclosures still fire unaided. Two tests pin both directions, one
+that the aside stays quiet and one witness that a real denial still fires.
+
+**This error pointed the wrong way, and that is why it was worth fixing rather
+than documenting.** A false alarm makes you read a page for nothing. This one
+made you discard a contest that really pays, and a reader who acts on it never
+finds out they were wrong.
 
 ### Held out set, 40 pages never read while writing the rules
 
@@ -238,6 +253,30 @@ Three of the twenty two contests running **today** carry that disclaimer, and
 none of the forty finished ones drawn across the platform's whole history do.
 That looks like a recent practice. With three cases it is a hypothesis, not a
 finding, and it is written here as one.
+
+### Two families that came from a measurement, not from an idea
+
+Fifteen open contests carrying real cash prizes were read on 2026-08-30. The
+question was not what they promise, it was what they quietly require.
+
+**Eleven of the fifteen require you to publish on a platform you do not
+control.** A video hosted on YouTube, Vimeo or TikTok, a publicly reachable
+demo, or a listing on an app store. **Not one eligibility card mentions it.**
+The card tells you your age, your student status, your country. It never tells
+you what you will have to hand over. So a reader can be perfectly eligible,
+perfectly capable, and still unable to finish, and they find out after building
+everything. That is now the `third party publication required` restriction.
+
+**On one page, being selected sends you a bill.** A hundred entrants advance,
+ten receive five thousand dollars, and the other ninety owe five hundred to
+continue. The only number at the top of the page is the prize. That is now
+`advancement costs money`, and it is the one restriction here rated critical,
+because a good outcome that costs you is the shape a reader is least prepared
+for.
+
+Both are matched deterministically, both carry witnesses in the test suite that
+must stay quiet, and both were written from pages read for a real decision
+rather than from imagination about what a page might say.
 
 ### A third domain, and the clearest evidence for the whole design
 
