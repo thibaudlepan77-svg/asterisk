@@ -7,11 +7,15 @@
    "title": "RevenueCat Shipaton 2026",
    "labels": {
     "prize_is_not_cash": false,
-    "students_only": false
+    "students_only": false,
+    "team_required": false,
+    "demo_video_required": true
    },
    "evidence": {
     "prize_is_not_cash": "prize block repeats a non-cash disclaimer 0 times",
-    "students_only": "Ages 13 to 99 only Specific countries/territories excluded View full rules October 01 at 2:45am EDT to deadline View schedule Deadline: Sep "
+    "students_only": "Ages 13 to 99 only Specific countries/territories excluded View full rules October 01 at 2:45am EDT to deadline View schedule Deadline: Sep ",
+    "what_to_submit": "Requirements WHAT TO BUILD Entrants must create a working software application that uses the RevenueCat SDK to power at least one in-app or web purchase (each a \"Project\"). Apps must be built for iOS, iPadOS, macOS, or Android. The first pu",
+    "eligibility_card_seen": true
    }
   },
   {
@@ -19,11 +23,15 @@
    "title": "All Things Agentic Hackathon",
    "labels": {
     "prize_is_not_cash": false,
-    "students_only": false
+    "students_only": false,
+    "team_required": false,
+    "demo_video_required": true
    },
    "evidence": {
     "prize_is_not_cash": "prize block repeats a non-cash disclaimer 0 times",
-    "students_only": "Above legal age of majority in country of residence Specific countries/territories excluded View full rules August 31 at 8:00pm EDT to deadl"
+    "students_only": "Above legal age of majority in country of residence Specific countries/territories excluded View full rules August 31 at 8:00pm EDT to deadl",
+    "what_to_submit": "Requirements What to Build Build and deploy a next-generation, autonomous AI Agent leveraging Gemini 3.5 Flash that operates beyond standard chat loops. The system can run asynchronously in the background, handle the heavy lifting of comple",
+    "eligibility_card_seen": true
    }
   },
   {
@@ -31,11 +39,15 @@
    "title": "Global Innovation Build Challenge V2",
    "labels": {
     "prize_is_not_cash": true,
-    "students_only": true
+    "students_only": true,
+    "team_required": false,
+    "demo_video_required": true
    },
    "evidence": {
     "prize_is_not_cash": "prize block repeats a non-cash disclaimer 15 times",
-    "students_only": "Ages 13+ only Students only Companies/professional organizations excluded from participation All countries/territories, excluding standard e"
+    "students_only": "Ages 13+ only Students only Companies/professional organizations excluded from participation All countries/territories, excluding standard e",
+    "what_to_submit": "Requirements What to Build Build a fully functional prototype, model, or technical system that directly aligns with one of our three challenge tracks: Track 01: TECH (LLM, 50M parameters) , Track 02: Applied (Med/Finance) , or Track 03: Ope",
+    "eligibility_card_seen": true
    }
   },
   {
@@ -43,11 +55,15 @@
    "title": "Agentic Cinema: The Blockbuster Hackathon",
    "labels": {
     "prize_is_not_cash": false,
-    "students_only": false
+    "students_only": false,
+    "team_required": false,
+    "demo_video_required": true
    },
    "evidence": {
     "prize_is_not_cash": "prize block repeats a non-cash disclaimer 0 times",
-    "students_only": "Above legal age of majority in country of residence Specific countries/territories excluded &#215; Specific countries/territories excluded A"
+    "students_only": "Above legal age of majority in country of residence Specific countries/territories excluded &#215; Specific countries/territories excluded A",
+    "what_to_submit": "Requirements What to Build 🎬 Build a functional agent—powered by Gemini and Google Cloud Agent Builder—that integrates a Partner Entity's product or MCP to power a real media & entertainment workflow. Partners: IBM Grafana Labs Parallel Cli",
+    "eligibility_card_seen": true
    }
   },
   {
@@ -55,11 +71,15 @@
    "title": "Nebius x NVIDIA Global AI Hackathon",
    "labels": {
     "prize_is_not_cash": false,
-    "students_only": false
+    "students_only": false,
+    "team_required": false,
+    "demo_video_required": true
    },
    "evidence": {
     "prize_is_not_cash": "prize block repeats a non-cash disclaimer 0 times",
-    "students_only": "Above legal age of majority in country of residence All countries/territories, excluding standard exceptions View full rules October 30 at 1"
+    "students_only": "Above legal age of majority in country of residence All countries/territories, excluding standard exceptions View full rules October 30 at 1",
+    "what_to_submit": "Requirements The Challenge All submissions must run on either Nebius Token Factory or Nebius AI Cloud and use at least one NVIDIA open source model. Everything else is up to you. What to Build Whether it is an app, agent, or something entir",
+    "eligibility_card_seen": true
    }
   },
   {
@@ -67,11 +87,15 @@
    "title": "Agents for Humans Hackathon",
    "labels": {
     "prize_is_not_cash": false,
-    "students_only": false
+    "students_only": false,
+    "team_required": false,
+    "demo_video_required": true
    },
    "evidence": {
     "prize_is_not_cash": "prize block repeats a non-cash disclaimer 0 times",
-    "students_only": "Above legal age of majority in country of residence Specific countries/territories excluded &#215; Specific countries/territories excluded A"
+    "students_only": "Above legal age of majority in country of residence Specific countries/territories excluded &#215; Specific countries/territories excluded A",
+    "what_to_submit": "Requirements What to Build Build a new AI agent with Strands Agents SDK that does real work for people. Your agent should take on something people actually deal with and handle it end to end. Enter it in one of the three tracks below. Every",
+    "eligibility_card_seen": true
    }
   },
   {
@@ -79,11 +103,15 @@
    "title": "UnivaBio",
    "labels": {
     "prize_is_not_cash": true,
-    "students_only": true
+    "students_only": true,
+    "team_required": false,
+    "demo_video_required": true
    },
    "evidence": {
     "prize_is_not_cash": "prize block repeats a non-cash disclaimer 3 times",
-    "students_only": "Ages 13+ only Students only Companies/professional organizations excluded from participation All countries/territories, excluding standard e"
+    "students_only": "Ages 13+ only Students only Companies/professional organizations excluded from participation All countries/territories, excluding standard e",
+    "what_to_submit": "Requirements Submission Requirements Project : Can be a website, app, or other coding prototypes that have user interaction capabilities. Demo Video : Video explaining the purpose of the project, showcasing project features, and demonstrati",
+    "eligibility_card_seen": true
    }
   },
   {
@@ -91,11 +119,15 @@
    "title": "VoltHacks",
    "labels": {
     "prize_is_not_cash": true,
-    "students_only": true
+    "students_only": true,
+    "team_required": false,
+    "demo_video_required": false
    },
    "evidence": {
     "prize_is_not_cash": "prize block repeats a non-cash disclaimer 3 times",
-    "students_only": "Ages 13+ only Students only Companies/professional organizations excluded from participation All countries/territories, excluding standard e"
+    "students_only": "Ages 13+ only Students only Companies/professional organizations excluded from participation All countries/territories, excluding standard e",
+    "what_to_submit": "Requirements What to Build Build a project related to one or more of the VoltHacks themes, such as: IoT systems Robotics and automation AI-powered tools Embedded systems Smart devices Sustainability or health technology solutions Projects c",
+    "eligibility_card_seen": true
    }
   },
   {
@@ -103,11 +135,15 @@
    "title": "The WebMCP Challenge",
    "labels": {
     "prize_is_not_cash": false,
-    "students_only": false
+    "students_only": false,
+    "team_required": false,
+    "demo_video_required": true
    },
    "evidence": {
     "prize_is_not_cash": "prize block repeats a non-cash disclaimer 0 times",
-    "students_only": "Above legal age of majority in country of residence Specific countries/territories excluded &#215; Specific countries/territories excluded B"
+    "students_only": "Above legal age of majority in country of residence Specific countries/territories excluded &#215; Specific countries/territories excluded B",
+    "what_to_submit": "Requirements What to Build Build a WebMCP-powered web app that imagines and explores the future of the open web—where humans and agents can interact, collaborate, and create together. What to Submit Provide a working live URL that judges ca",
+    "eligibility_card_seen": true
    }
   },
   {
@@ -115,11 +151,15 @@
    "title": "TikTok TechJam 2026",
    "labels": {
     "prize_is_not_cash": false,
-    "students_only": true
+    "students_only": true,
+    "team_required": false,
+    "demo_video_required": true
    },
    "evidence": {
     "prize_is_not_cash": "prize block repeats a non-cash disclaimer 0 times",
-    "students_only": "Ages 18+ only College students only Companies/professional organizations excluded from participation Only specific countries/territories inc"
+    "students_only": "Ages 18+ only College students only Companies/professional organizations excluded from participation Only specific countries/territories inc",
+    "what_to_submit": "Requirements To submit your project, you will need to provide three things via Devpost: a written description detailing your solution and tech stack, a public code repository (with well-structured code and a comprehensive README), and a pub",
+    "eligibility_card_seen": true
    }
   },
   {
@@ -127,11 +167,15 @@
    "title": "AI Builders Hackathon",
    "labels": {
     "prize_is_not_cash": false,
-    "students_only": true
+    "students_only": true,
+    "team_required": false,
+    "demo_video_required": true
    },
    "evidence": {
     "prize_is_not_cash": "prize block repeats a non-cash disclaimer 0 times",
-    "students_only": "Above legal age of majority in country of residence Students only Companies/professional organizations excluded from participation All count"
+    "students_only": "Above legal age of majority in country of residence Students only Companies/professional organizations excluded from participation All count",
+    "what_to_submit": "Requirements What to Build Build an AI product that solves a real problem. We encourage teams to focus on creating products that people would genuinely want to use beyond the hackathon. Your project may be an AI application, autonomous agen",
+    "eligibility_card_seen": true
    }
   },
   {
@@ -139,11 +183,15 @@
    "title": "The Rice University Urban Sustainability Hackathon",
    "labels": {
     "prize_is_not_cash": false,
-    "students_only": true
+    "students_only": true,
+    "team_required": true,
+    "demo_video_required": false
    },
    "evidence": {
     "prize_is_not_cash": "prize block repeats a non-cash disclaimer 0 times",
-    "students_only": "Ages 18+ only College students only Team required: 2 to 6 members Companies/professional organizations excluded from participation US only V"
+    "students_only": "Ages 18+ only College students only Team required: 2 to 6 members Companies/professional organizations excluded from participation US only V",
+    "what_to_submit": "Requirements Deliverables Teams will pitch a solution idea that helps US cities optimize their sustainability performance while hosting large events, and specifically for FIFA World Cup 2026 events. Develop an interactive data visualization",
+    "eligibility_card_seen": true
    }
   },
   {
@@ -151,11 +199,15 @@
    "title": "OpenCV AI Competition 2026, powered by AWS",
    "labels": {
     "prize_is_not_cash": false,
-    "students_only": false
+    "students_only": false,
+    "team_required": false,
+    "demo_video_required": false
    },
    "evidence": {
     "prize_is_not_cash": "prize block repeats a non-cash disclaimer 0 times",
-    "students_only": "Above legal age of majority in country of residence All countries/territories, excluding standard exceptions View full rules October 27 at 2"
+    "students_only": "Above legal age of majority in country of residence All countries/territories, excluding standard exceptions View full rules October 27 at 2",
+    "what_to_submit": "Requirements Suggested Project Areas Projects are not limited to these areas, but the organizers especially welcome: • Active perception for autonomous inspection with agentic orchestration or MCP. • Physics-informed video prediction for pr",
+    "eligibility_card_seen": true
    }
   },
   {
@@ -163,11 +215,15 @@
    "title": "CALL-E: Your Code Is Calling",
    "labels": {
     "prize_is_not_cash": false,
-    "students_only": false
+    "students_only": false,
+    "team_required": false,
+    "demo_video_required": true
    },
    "evidence": {
     "prize_is_not_cash": "prize block repeats a non-cash disclaimer 0 times",
-    "students_only": "Above legal age of majority in country of residence All countries/territories, excluding standard exceptions View full rules September 14 at"
+    "students_only": "Above legal age of majority in country of residence All countries/territories, excluding standard exceptions View full rules September 14 at",
+    "what_to_submit": "Requirements What to Build Build and deploy a project that uses CALL-E's SDK, API, MCP, CLI, or SKILL to create an impactful business or project use case. Submissions can be a functional application, agent skill, workflow plugin, or another",
+    "eligibility_card_seen": true
    }
   },
   {
@@ -175,11 +231,15 @@
    "title": "Hacksocial 2026",
    "labels": {
     "prize_is_not_cash": false,
-    "students_only": true
+    "students_only": true,
+    "team_required": false,
+    "demo_video_required": false
    },
    "evidence": {
     "prize_is_not_cash": "prize block repeats a non-cash disclaimer 0 times",
-    "students_only": "Ages 13+ only Students only Companies/professional organizations excluded from participation All countries/territories, excluding standard e"
+    "students_only": "Ages 13+ only Students only Companies/professional organizations excluded from participation All countries/territories, excluding standard e",
+    "what_to_submit": "Requirements What to Build You can build anything that solves a real-world problem, makes life easier, or simply brings joy. Your project can fall into any category, technical or creative. Some ideas include: - A website or web app that hel",
+    "eligibility_card_seen": true
    }
   },
   {
@@ -187,11 +247,15 @@
    "title": "Galuxium Nexus V2",
    "labels": {
     "prize_is_not_cash": false,
-    "students_only": true
+    "students_only": true,
+    "team_required": false,
+    "demo_video_required": true
    },
    "evidence": {
     "prize_is_not_cash": "prize block repeats a non-cash disclaimer 0 times",
-    "students_only": "Above legal age of majority in country of residence Students only Companies/professional organizations excluded from participation All count"
+    "students_only": "Above legal age of majority in country of residence Students only Companies/professional organizations excluded from participation All count",
+    "what_to_submit": "Requirements To ensure your platform qualifies for the Grand Judging Panel and elite track evaluation, all teams must submit a complete, deployment-ready product portfolio. Submissions that fail to meet these premium benchmarks will be disq",
+    "eligibility_card_seen": true
    }
   },
   {
@@ -199,11 +263,15 @@
    "title": "NextStep Hacks 2026",
    "labels": {
     "prize_is_not_cash": false,
-    "students_only": true
+    "students_only": true,
+    "team_required": false,
+    "demo_video_required": false
    },
    "evidence": {
     "prize_is_not_cash": "prize block repeats a non-cash disclaimer 0 times",
-    "students_only": "Ages 13+ only Students only Companies/professional organizations excluded from participation All countries/territories, excluding standard e"
+    "students_only": "Ages 13+ only Students only Companies/professional organizations excluded from participation All countries/territories, excluding standard e",
+    "what_to_submit": "Requirements Theme Statement Our planet is facing unprecedented environmental challenges—from climate change and pollution to biodiversity loss and resource depletion. As these issues continue to grow, so does the need for innovative soluti",
+    "eligibility_card_seen": true
    }
   },
   {
@@ -211,11 +279,15 @@
    "title": "SPEED August AI Challenge",
    "labels": {
     "prize_is_not_cash": false,
-    "students_only": true
+    "students_only": true,
+    "team_required": false,
+    "demo_video_required": true
    },
    "evidence": {
     "prize_is_not_cash": "prize block repeats a non-cash disclaimer 0 times",
-    "students_only": "Ages 13+ only Students only Companies/professional organizations excluded from participation All countries/territories, excluding standard e"
+    "students_only": "Ages 13+ only Students only Companies/professional organizations excluded from participation All countries/territories, excluding standard e",
+    "what_to_submit": "Requirements What to Build Build an educational tool that leverages the power of AI/Machine Learning to transform how people learn, teach, or absorb information. Your project should aim to make knowledge more accessible, engaging, or person",
+    "eligibility_card_seen": true
    }
   },
   {
@@ -223,11 +295,15 @@
    "title": "SPEED September AI Challenge",
    "labels": {
     "prize_is_not_cash": false,
-    "students_only": true
+    "students_only": true,
+    "team_required": false,
+    "demo_video_required": true
    },
    "evidence": {
     "prize_is_not_cash": "prize block repeats a non-cash disclaimer 0 times",
-    "students_only": "Ages 13+ only Students only Companies/professional organizations excluded from participation All countries/territories, excluding standard e"
+    "students_only": "Ages 13+ only Students only Companies/professional organizations excluded from participation All countries/territories, excluding standard e",
+    "what_to_submit": "Requirements What to Build Build an educational tool that leverages the power of AI/Machine Learning to transform how people learn, teach, or absorb information. Your project should aim to make knowledge more accessible, engaging, or person",
+    "eligibility_card_seen": true
    }
   },
   {
@@ -235,11 +311,15 @@
    "title": "SPEED October AI Challenge",
    "labels": {
     "prize_is_not_cash": false,
-    "students_only": true
+    "students_only": true,
+    "team_required": false,
+    "demo_video_required": true
    },
    "evidence": {
     "prize_is_not_cash": "prize block repeats a non-cash disclaimer 0 times",
-    "students_only": "Ages 13+ only Students only Companies/professional organizations excluded from participation All countries/territories, excluding standard e"
+    "students_only": "Ages 13+ only Students only Companies/professional organizations excluded from participation All countries/territories, excluding standard e",
+    "what_to_submit": "Requirements What to Build Build an educational tool that leverages the power of AI/Machine Learning to transform how people learn, teach, or absorb information. Your project should aim to make knowledge more accessible, engaging, or person",
+    "eligibility_card_seen": true
    }
   },
   {
@@ -247,11 +327,15 @@
    "title": "COMPSPHERE 12",
    "labels": {
     "prize_is_not_cash": false,
-    "students_only": true
+    "students_only": true,
+    "team_required": false,
+    "demo_video_required": false
    },
    "evidence": {
     "prize_is_not_cash": "prize block repeats a non-cash disclaimer 0 times",
-    "students_only": "Ages 15 to 25 only Students only Companies/professional organizations excluded from participation All countries/territories, excluding stand"
+    "students_only": "Ages 15 to 25 only Students only Companies/professional organizations excluded from participation All countries/territories, excluding stand",
+    "what_to_submit": "Requirements What to Build Participants are challenged to build a Minimum Viable Product (MVP) that addresses a specific industry problem using Web3 foundations (e.g., blockchain, smart contracts, or decentralized storage) . You are free to",
+    "eligibility_card_seen": true
    }
   },
   {
@@ -259,11 +343,15 @@
    "title": "Hack the Habitat",
    "labels": {
     "prize_is_not_cash": false,
-    "students_only": true
+    "students_only": true,
+    "team_required": false,
+    "demo_video_required": false
    },
    "evidence": {
     "prize_is_not_cash": "prize block repeats a non-cash disclaimer 0 times",
-    "students_only": "Above legal age of majority in country of residence Students only Companies/professional organizations excluded from participation All count"
+    "students_only": "Above legal age of majority in country of residence Students only Companies/professional organizations excluded from participation All count",
+    "what_to_submit": "Requirements What to Build Build a project that aligns with the theme: \"Build tech that protects the planet.\" Your project should combine code and real environmental data or context to produce a tool, system, or experience that supports con",
+    "eligibility_card_seen": true
    }
   }
  ]

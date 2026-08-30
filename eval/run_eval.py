@@ -5,9 +5,16 @@ Most contest submissions show one good screenshot. This shows a number, and
 the number is allowed to be bad. Two labels, both checkable by anyone who
 opens the page.
 
-  prize_is_not_cash  the prize block itself says the award cannot be
-                     exchanged or redeemed for cash
-  students_only      the eligibility card says Students only
+  prize_is_not_cash    the prize block itself says the award cannot be
+                       exchanged or redeemed for cash
+  students_only        the eligibility card says Students only
+  team_required        the structured eligibility card says Team required
+  demo_video_required  the What to Submit section asks for a video
+
+Every label is read from a source the auditor never parses, so the score is a
+test and not a memory. **A label with no positive case in a set prints what the
+set can show, not an f1 of zero**, because an f1 of zero on an empty class is a
+lie about the detector.
 
 Run it offline first. The deterministic layer alone should already be strong
 on the first label, because the wording is imposed by consumer law. The model
@@ -31,6 +38,15 @@ from asterisk.segment import segment             # noqa: E402
 PREDICTS = {
     "prize_is_not_cash": {"cash", "amount", "prize not cash"},
     "students_only": {"anyone", "students only"},
+    # ADDED 2026-08-30. The tool prints eleven families of restriction and two
+    # of them had ever been scored. Nine tenths of what it says carried no
+    # number, and a number nobody has is indistinguishable from a bad one.
+    #
+    # Both of these are labelled from a source the auditor never reads. The
+    # first from the STRUCTURED eligibility card, a closed field filled in a
+    # form. The second from the `What to Submit` section.
+    "team_required": {"team required"},
+    "demo_video_required": {"third party publication required", "video required"},
 }
 # A prediction only counts when the quoted counter evidence really is about it.
 CONFIRMS = {
@@ -38,6 +54,20 @@ CONFIRMS = {
                           "not redeemable for cash", "sponsor-provided"),
     "students_only": ("students only", "student teams", "currently enrolled",
                       "college students only"),
+    "team_required": ("team required", "teams of", "form a team", "join a team",
+                      "minimum team size"),
+    # NO NEEDLE, ON PURPOSE, and it cost a false negative to work out why.
+    #
+    # The confirming needle is checked against the QUOTED EXCERPT, which is cut
+    # at a fixed length. On one page the requirement sat past the cut, so the
+    # excerpt said `Text description, PUBLIC URL to your code repo` and the
+    # word `video` never appeared in it. The tool had found the right thing and
+    # the scorer marked it a miss.
+    #
+    # A needle guards against a family that is too broad. This family is named
+    # for exactly one thing, so the name is the evidence and a second check on
+    # a truncated string only adds a way to be wrong.
+    "demo_video_required": (),
 }
 
 
@@ -47,6 +77,8 @@ def predict(findings, label: str) -> tuple[bool, str]:
     for f in findings:
         if f.claim_kind not in kinds:
             continue
+        if not needles:
+            return True, f.counter[:150]
         low = f.counter.lower()
         if any(n in low for n in needles):
             return True, f.counter[:150]

@@ -87,6 +87,22 @@ RESTRICTIONS = [
      r"publicly[- ]accessible (?:url|link|site|website|demo|deployment|version)|"
      r"(?:must|shall|required)[^.]{0,80}(?:apple app store|google play))",
      "high", "Finishing this requires publishing on a platform you may not control."),
+    # ADDED 2026-08-30 AFTER MEASURING THE FAMILY ABOVE, which needs a platform
+    # named or the words `uploaded publicly` and therefore misses the plainest
+    # wording there is, `a 2 minute demo video`.
+    #
+    # It is a separate family on purpose, one severity lower, because the tool
+    # cannot know from a page alone whether the place hosts video. What it can
+    # say honestly is that many do not. One place whose own help page reads
+    # `you'll need to first upload it to one of the following video-hosting
+    # platforms` refuses any other address outright, so on that place asking
+    # for a video IS asking for a publication. Read on 2026-08-30.
+    ("video required",
+     r"((?:demo|submission|pitch|presentation|walkthrough) video|"
+     r"video (?:demo|submission|pitch|presentation)|"
+     r"\d+[- ]?(?:to[- ]?\d+[- ]?)?(?:minute|min) video)",
+     "medium", "A video is required. Many places host none of their own, so this "
+               "can mean publishing on a platform you do not control."),
     # Added the same day, from a page where being selected sends you a bill.
     # A hundred entrants advance, ten are paid, and ninety owe five hundred
     # dollars. The page shows one number, the prize, at the top.

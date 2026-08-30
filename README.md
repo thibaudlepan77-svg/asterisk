@@ -193,14 +193,23 @@ pages link to.
 
 ### Development set, 22 pages the rules were written against
 
-| label | precision | recall | F1 |
-|---|---|---|---|
-| prize is not cash | 1.00 | 1.00 | 1.00 |
-| reserved to students | 1.00 | 1.00 | 1.00 |
+| label | precision | recall | F1 | positives |
+|---|---|---|---|---|
+| prize is not cash | 1.00 | 1.00 | 1.00 | 3 of 22 |
+| reserved to students | 1.00 | 1.00 | 1.00 | 14 of 22 |
+| team required | 1.00 | 1.00 | 1.00 | 1 of 22 |
+| a video is required | 0.94 | 1.00 | 0.97 | 15 of 22 |
 
 ```
 python eval/run_eval.py --offline --show-errors
 ```
+
+**The last two labels were added on 30 August, and they were added because the
+tool prints eleven families of restriction and two of them had ever been
+scored.** Nine tenths of what it says carried no number in front of it, and a
+number nobody has is indistinguishable from a number that is bad. Both new
+labels are read from a source the auditor never parses, the structured
+eligibility card and the submission requirements block.
 
 **This table used to read 0.75 precision on the first label, and the note under
 it was wrong.** The single false positive was a contest paying $12,000 in cash
@@ -231,12 +240,40 @@ targeted extractors that share no code with the auditor.
 | label | result |
 |---|---|
 | reserved to students | precision 1.00, recall 1.00, on 4 positives and 36 negatives |
+| team required | precision 1.00, recall 1.00, on 5 positives and 35 negatives |
+| a video is required | precision 0.88, recall 1.00, on 7 positives and 33 negatives |
 | prize is not cash | no positive case in this set, 0 false alarms on 40 pages |
 
 ```
 python eval/build_holdout.py 40      # draws a fresh random sample and labels it
+python eval/add_labels.py            # adds the two newer labels to both sets
 python eval/run_eval.py --holdout --offline
 ```
+
+### The two false alarms on the video label are the reference, not the tool
+
+There is one on each set, and they are left in the tables rather than removed.
+
+> A video demonstration / pitch no longer than 5 minutes.
+
+> Submit a video demonstration of your project (3-4 minutes)
+
+Both pages plainly require a video. **The reference label missed them**, because
+it reads the block between `Requirements` and `Prizes` and on those two pages
+the sentence sits outside it. Precision on this label is therefore a floor, and
+the true figure is higher than 0.94 and 0.88.
+
+The reference was already rewritten once. Its first version read four hundred
+characters after the heading `What to Submit`, scored the tool at 0.27
+precision with eleven false alarms, and **every one of those eleven was a page
+that plainly asks for a video**. The tool was right and the measurement was
+wrong. That version had been built from the one wording its author had read,
+which is the same mistake this project keeps finding in its own rules.
+
+**It was not rewritten a third time, and that is deliberate.** Tuning a
+reference until the tool looks perfect is fitting the ground truth to the
+answer. Two quoted misses a reader can check in ten seconds are worth more than
+a 1.00 nobody can audit.
 
 Two honest remarks about that table.
 

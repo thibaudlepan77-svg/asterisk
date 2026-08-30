@@ -9,11 +9,15 @@
    "prize": 13500,
    "labels": {
     "prize_is_not_cash": false,
-    "students_only": false
+    "students_only": false,
+    "team_required": true,
+    "demo_video_required": true
    },
    "evidence": {
     "disclaimer_hits": 0,
-    "eligibility_card": "Above legal age of majority in country of residence Team required: 2 to 4 members All countries/territories, excluding standard exceptions View full rules View "
+    "eligibility_card": "Above legal age of majority in country of residence Team required: 2 to 4 members All countries/territories, excluding standard exceptions View full rules View ",
+    "what_to_submit": "Requirements What to Build Create innovative solutions that address the United Nations' 17 Sustainable Development Goals (SDGs) using Google Technologies. Project Setup 1. Please clearly describe the challenge you are solving using a proble",
+    "eligibility_card_seen": true
    }
   },
   {
@@ -22,11 +26,15 @@
    "prize": 26200,
    "labels": {
     "prize_is_not_cash": false,
-    "students_only": false
+    "students_only": false,
+    "team_required": false,
+    "demo_video_required": false
    },
    "evidence": {
     "disclaimer_hits": 0,
-    "eligibility_card": ""
+    "eligibility_card": "",
+    "what_to_submit": "Requirements To qualify for consideration by the judges, your submission must use at least one of the technologies of the Convergence Stack: Fetch.AI - decentralised digital world in which useful economic activity takes place Sovrin - decen",
+    "eligibility_card_seen": false
    }
   },
   {
@@ -35,11 +43,15 @@
    "prize": 17250,
    "labels": {
     "prize_is_not_cash": false,
-    "students_only": false
+    "students_only": false,
+    "team_required": false,
+    "demo_video_required": false
    },
    "evidence": {
     "disclaimer_hits": 0,
-    "eligibility_card": ""
+    "eligibility_card": "",
+    "what_to_submit": "Requirements Submit your project before 10:00 a.m. on Sunday! You may continue working until 11. Hackathon Sponsors ",
+    "eligibility_card_seen": false
    }
   },
   {
@@ -48,11 +60,15 @@
    "prize": 8216,
    "labels": {
     "prize_is_not_cash": false,
-    "students_only": false
+    "students_only": false,
+    "team_required": false,
+    "demo_video_required": false
    },
    "evidence": {
     "disclaimer_hits": 0,
-    "eligibility_card": ""
+    "eligibility_card": "",
+    "what_to_submit": "",
+    "eligibility_card_seen": false
    }
   },
   {
@@ -61,11 +77,15 @@
    "prize": 235568,
    "labels": {
     "prize_is_not_cash": false,
-    "students_only": true
+    "students_only": true,
+    "team_required": false,
+    "demo_video_required": true
    },
    "evidence": {
     "disclaimer_hits": 0,
-    "eligibility_card": "Ages 13+ only Students only All countries/territories, excluding standard exceptions View full rules View schedule Jul 21 – 23, 2023 Online Public $ 235,568 in "
+    "eligibility_card": "Ages 13+ only Students only All countries/territories, excluding standard exceptions View full rules View schedule Jul 21 – 23, 2023 Online Public $ 235,568 in ",
+    "what_to_submit": "Requirements What to Build Build anything \"tech-related\" to win prizes. This can include - Machine Learning, AR/VR software, Computer Science Programs, Games, Websites, Apps, Mini-Computers, Hardware systems, and a lot more! If you have any",
+    "eligibility_card_seen": true
    }
   },
   {
@@ -74,11 +94,15 @@
    "prize": 112750,
    "labels": {
     "prize_is_not_cash": false,
-    "students_only": false
+    "students_only": false,
+    "team_required": false,
+    "demo_video_required": false
    },
    "evidence": {
     "disclaimer_hits": 0,
-    "eligibility_card": "Ages 13+ only All countries/territories, excluding standard exceptions View full rules View schedule Aug 18 – 21, 2023 Online Public $ 112,750 in prizes 621 par"
+    "eligibility_card": "Ages 13+ only All countries/territories, excluding standard exceptions View full rules View schedule Aug 18 – 21, 2023 Online Public $ 112,750 in prizes 621 par",
+    "what_to_submit": "Requirements What to Build \"Create software that addresses an issue in first generation low income students such as: financial planning, career opportunities, mental health, community building, or an issue found in your community.\" What to ",
+    "eligibility_card_seen": true
    }
   },
   {
@@ -87,11 +111,15 @@
    "prize": 30700,
    "labels": {
     "prize_is_not_cash": false,
-    "students_only": false
+    "students_only": false,
+    "team_required": false,
+    "demo_video_required": true
    },
    "evidence": {
     "disclaimer_hits": 0,
-    "eligibility_card": ""
+    "eligibility_card": "",
+    "what_to_submit": "Requirements Project Options: 1. Build a functioning MVP ready for immediate use. OR 2. Develop a prototype concept for an application that can later become a functioning product. All of the following items must be included in submission to",
+    "eligibility_card_seen": false
    }
   },
   {
@@ -100,11 +128,15 @@
    "prize": 8748,
    "labels": {
     "prize_is_not_cash": false,
-    "students_only": false
+    "students_only": false,
+    "team_required": false,
+    "demo_video_required": false
    },
    "evidence": {
     "disclaimer_hits": 0,
-    "eligibility_card": ""
+    "eligibility_card": "",
+    "what_to_submit": "Requirements Make sure you select the prizes that apply to your hack. All projects must be submitted before 8am on Sunday, Feburary 17. Note: You may continue to work on your hack until 9am on Sunday. Hackathon Sponsors ",
+    "eligibility_card_seen": false
    }
   },
   {
@@ -113,11 +145,15 @@
    "prize": 1789,
    "labels": {
     "prize_is_not_cash": false,
-    "students_only": false
+    "students_only": false,
+    "team_required": false,
+    "demo_video_required": true
    },
    "evidence": {
     "disclaimer_hits": 0,
-    "eligibility_card": ""
+    "eligibility_card": "",
+    "what_to_submit": "Requirements Create anything your heart desires and most importantly have fun doing it :) If you are entering a specific category your project must be relevant to that category in order to be eligible to win a prize for that category. Each ",
+    "eligibility_card_seen": false
    }
   },
   {
@@ -126,11 +162,15 @@
    "prize": 5554,
    "labels": {
     "prize_is_not_cash": false,
-    "students_only": false
+    "students_only": false,
+    "team_required": false,
+    "demo_video_required": false
    },
    "evidence": {
     "disclaimer_hits": 0,
-    "eligibility_card": ""
+    "eligibility_card": "",
+    "what_to_submit": "Requirements Submission requirements - You are allowed to enter ONE (1) submission for consideration by the judges. - Source code via GitHub repository (preferred) or compressed .zip - Please be prepared to demo your submission IN PERSON to",
+    "eligibility_card_seen": false
    }
   },
   {
@@ -139,11 +179,15 @@
    "prize": 6000,
    "labels": {
     "prize_is_not_cash": false,
-    "students_only": false
+    "students_only": false,
+    "team_required": false,
+    "demo_video_required": false
    },
    "evidence": {
     "disclaimer_hits": 0,
-    "eligibility_card": ""
+    "eligibility_card": "",
+    "what_to_submit": "Requirements Answer all the questions that are presented. The whole team needs to be added! Hackathon Sponsors ",
+    "eligibility_card_seen": false
    }
   },
   {
@@ -152,11 +196,15 @@
    "prize": 20912,
    "labels": {
     "prize_is_not_cash": false,
-    "students_only": false
+    "students_only": false,
+    "team_required": false,
+    "demo_video_required": false
    },
    "evidence": {
     "disclaimer_hits": 0,
-    "eligibility_card": ""
+    "eligibility_card": "",
+    "what_to_submit": "",
+    "eligibility_card_seen": false
    }
   },
   {
@@ -165,11 +213,15 @@
    "prize": 1600,
    "labels": {
     "prize_is_not_cash": false,
-    "students_only": false
+    "students_only": false,
+    "team_required": false,
+    "demo_video_required": false
    },
    "evidence": {
     "disclaimer_hits": 0,
-    "eligibility_card": ""
+    "eligibility_card": "",
+    "what_to_submit": "Requirements The submission requirements are very relaxed. Just set up a team here on Devpost.com with a short snippet on what you are planning to create during the Hack Day within 12 hours, and submit your team to the hackathon. You are en",
+    "eligibility_card_seen": false
    }
   },
   {
@@ -178,11 +230,15 @@
    "prize": 730,
    "labels": {
     "prize_is_not_cash": false,
-    "students_only": false
+    "students_only": false,
+    "team_required": false,
+    "demo_video_required": false
    },
    "evidence": {
     "disclaimer_hits": 0,
-    "eligibility_card": ""
+    "eligibility_card": "",
+    "what_to_submit": "",
+    "eligibility_card_seen": false
    }
   },
   {
@@ -191,11 +247,15 @@
    "prize": 2940,
    "labels": {
     "prize_is_not_cash": false,
-    "students_only": false
+    "students_only": false,
+    "team_required": false,
+    "demo_video_required": false
    },
    "evidence": {
     "disclaimer_hits": 0,
-    "eligibility_card": ""
+    "eligibility_card": "",
+    "what_to_submit": "",
+    "eligibility_card_seen": false
    }
   },
   {
@@ -204,11 +264,15 @@
    "prize": 2750,
    "labels": {
     "prize_is_not_cash": false,
-    "students_only": false
+    "students_only": false,
+    "team_required": false,
+    "demo_video_required": false
    },
    "evidence": {
     "disclaimer_hits": 0,
-    "eligibility_card": ""
+    "eligibility_card": "",
+    "what_to_submit": "",
+    "eligibility_card_seen": false
    }
   },
   {
@@ -217,11 +281,15 @@
    "prize": 1530,
    "labels": {
     "prize_is_not_cash": false,
-    "students_only": false
+    "students_only": false,
+    "team_required": false,
+    "demo_video_required": false
    },
    "evidence": {
     "disclaimer_hits": 0,
-    "eligibility_card": ""
+    "eligibility_card": "",
+    "what_to_submit": "",
+    "eligibility_card_seen": false
    }
   },
   {
@@ -230,11 +298,15 @@
    "prize": 1342,
    "labels": {
     "prize_is_not_cash": false,
-    "students_only": false
+    "students_only": false,
+    "team_required": false,
+    "demo_video_required": true
    },
    "evidence": {
     "disclaimer_hits": 0,
-    "eligibility_card": ""
+    "eligibility_card": "",
+    "what_to_submit": "Requirements 1. Create and post a 5 minute demo video of your Apache Geode-based application The demo video is the primary submission component for scoring. Be sure to post it on a public Youtube or Vimeo channel. It should be 5 minutes or ",
+    "eligibility_card_seen": false
    }
   },
   {
@@ -243,11 +315,15 @@
    "prize": 12150,
    "labels": {
     "prize_is_not_cash": false,
-    "students_only": false
+    "students_only": false,
+    "team_required": false,
+    "demo_video_required": false
    },
    "evidence": {
     "disclaimer_hits": 0,
-    "eligibility_card": ""
+    "eligibility_card": "",
+    "what_to_submit": "",
+    "eligibility_card_seen": false
    }
   },
   {
@@ -256,11 +332,15 @@
    "prize": 10000,
    "labels": {
     "prize_is_not_cash": false,
-    "students_only": false
+    "students_only": false,
+    "team_required": false,
+    "demo_video_required": false
    },
    "evidence": {
     "disclaimer_hits": 0,
-    "eligibility_card": ""
+    "eligibility_card": "",
+    "what_to_submit": "Requirements Your tool could be an app, a website, an interactive online experience, or a device. Inspiration and examples will be provided. Participants will have one day to design and build their tool. Participants will keep intellectual ",
+    "eligibility_card_seen": false
    }
   },
   {
@@ -269,11 +349,15 @@
    "prize": 850,
    "labels": {
     "prize_is_not_cash": false,
-    "students_only": false
+    "students_only": false,
+    "team_required": false,
+    "demo_video_required": false
    },
    "evidence": {
     "disclaimer_hits": 0,
-    "eligibility_card": ""
+    "eligibility_card": "",
+    "what_to_submit": "Requirements A valid submission includes some sort of functioning creation A way to demo that creation Hackathon Sponsors ",
+    "eligibility_card_seen": false
    }
   },
   {
@@ -282,11 +366,15 @@
    "prize": 3000,
    "labels": {
     "prize_is_not_cash": false,
-    "students_only": false
+    "students_only": false,
+    "team_required": false,
+    "demo_video_required": false
    },
    "evidence": {
     "disclaimer_hits": 0,
-    "eligibility_card": ""
+    "eligibility_card": "",
+    "what_to_submit": "Requirements 5-minute pitch presentation and a prototype of their product/service Hackathon Sponsors ",
+    "eligibility_card_seen": false
    }
   },
   {
@@ -295,11 +383,15 @@
    "prize": 6000,
    "labels": {
     "prize_is_not_cash": false,
-    "students_only": false
+    "students_only": false,
+    "team_required": false,
+    "demo_video_required": false
    },
    "evidence": {
     "disclaimer_hits": 0,
-    "eligibility_card": ""
+    "eligibility_card": "",
+    "what_to_submit": "Requirements Participants will be creating a place for Soldiers to interact with their nutrition data in a mobile environment. A link to the mobile app or site must be provided. Hackathon Sponsors ",
+    "eligibility_card_seen": false
    }
   },
   {
@@ -308,11 +400,15 @@
    "prize": 4350,
    "labels": {
     "prize_is_not_cash": false,
-    "students_only": false
+    "students_only": false,
+    "team_required": false,
+    "demo_video_required": false
    },
    "evidence": {
     "disclaimer_hits": 0,
-    "eligibility_card": "Ages 13+ only All countries/territories, excluding standard exceptions View full rules View schedule Dec 20 – 24, 2024 Online Public $ 4,350 in prizes 327 parti"
+    "eligibility_card": "Ages 13+ only All countries/territories, excluding standard exceptions View full rules View schedule Dec 20 – 24, 2024 Online Public $ 4,350 in prizes 327 parti",
+    "what_to_submit": "Requirements Projects must tackle one of the laerdal challenges. WHAT TO BUILD A web app, website, mobile application, or other product that solves a problem related to health , including but not limited to mental health, healthcare infrast",
+    "eligibility_card_seen": true
    }
   },
   {
@@ -321,11 +417,15 @@
    "prize": 50000,
    "labels": {
     "prize_is_not_cash": false,
-    "students_only": false
+    "students_only": false,
+    "team_required": false,
+    "demo_video_required": false
    },
    "evidence": {
     "disclaimer_hits": 0,
-    "eligibility_card": ""
+    "eligibility_card": "",
+    "what_to_submit": "Requirements A valid submission is a software or hardware project fully produced at Hack3, from start to finish. Remember to include all your team member names, up to 4 people. Your Devpost submission will be posted on our \"Submissions\" tab",
+    "eligibility_card_seen": false
    }
   },
   {
@@ -334,11 +434,15 @@
    "prize": 7500,
    "labels": {
     "prize_is_not_cash": false,
-    "students_only": false
+    "students_only": false,
+    "team_required": false,
+    "demo_video_required": false
    },
    "evidence": {
     "disclaimer_hits": 0,
-    "eligibility_card": ""
+    "eligibility_card": "",
+    "what_to_submit": "",
+    "eligibility_card_seen": false
    }
   },
   {
@@ -347,11 +451,15 @@
    "prize": 27620,
    "labels": {
     "prize_is_not_cash": false,
-    "students_only": false
+    "students_only": false,
+    "team_required": false,
+    "demo_video_required": false
    },
    "evidence": {
     "disclaimer_hits": 0,
-    "eligibility_card": ""
+    "eligibility_card": "",
+    "what_to_submit": "",
+    "eligibility_card_seen": false
    }
   },
   {
@@ -360,11 +468,15 @@
    "prize": 140194,
    "labels": {
     "prize_is_not_cash": false,
-    "students_only": false
+    "students_only": false,
+    "team_required": false,
+    "demo_video_required": true
    },
    "evidence": {
     "disclaimer_hits": 0,
-    "eligibility_card": ""
+    "eligibility_card": "",
+    "what_to_submit": "Requirements WHAT AND HOW DO I SUBMIT? Project submissions must be made by 12:00 pm on May 30th 2021 . If you are not able to reach this deadline and have an almost-complete project, we will accept your submission the following day but make",
+    "eligibility_card_seen": false
    }
   },
   {
@@ -373,11 +485,15 @@
    "prize": 1200,
    "labels": {
     "prize_is_not_cash": false,
-    "students_only": false
+    "students_only": false,
+    "team_required": false,
+    "demo_video_required": false
    },
    "evidence": {
     "disclaimer_hits": 0,
-    "eligibility_card": ""
+    "eligibility_card": "",
+    "what_to_submit": "Requirements 1. A link to GitHub containing your project, or a .zip file of your code Hackathon Sponsors ",
+    "eligibility_card_seen": false
    }
   },
   {
@@ -386,11 +502,15 @@
    "prize": 2000,
    "labels": {
     "prize_is_not_cash": false,
-    "students_only": false
+    "students_only": false,
+    "team_required": true,
+    "demo_video_required": false
    },
    "evidence": {
     "disclaimer_hits": 0,
-    "eligibility_card": "Ages 17+ only Team required: 2 to 4 members US only View full rules View schedule Nov 20, 2025 Amazon-SJC 18 Public $ 2,000 in cash 14 participants AWS Design D"
+    "eligibility_card": "Ages 17+ only Team required: 2 to 4 members US only View full rules View schedule Nov 20, 2025 Amazon-SJC 18 Public $ 2,000 in cash 14 participants AWS Design D",
+    "what_to_submit": "",
+    "eligibility_card_seen": true
    }
   },
   {
@@ -399,11 +519,15 @@
    "prize": 100000,
    "labels": {
     "prize_is_not_cash": false,
-    "students_only": false
+    "students_only": false,
+    "team_required": true,
+    "demo_video_required": false
    },
    "evidence": {
     "disclaimer_hits": 0,
-    "eligibility_card": "Ages 16+ only Team required: 2 to 4 members Only specific countries/territories included View full rules View schedule Sep 28 – 29, 2025 Jaipur Public ₹ 100,000"
+    "eligibility_card": "Ages 16+ only Team required: 2 to 4 members Only specific countries/territories included View full rules View schedule Sep 28 – 29, 2025 Jaipur Public ₹ 100,000",
+    "what_to_submit": "Requirements What to Build (Project Scope) Teams should pick 1 problem statement from the given list (15 total) and build a solution that fits one or more of the themes: Affordability – low-cost, accessible solutions. Sustainability – eco-f",
+    "eligibility_card_seen": true
    }
   },
   {
@@ -412,11 +536,15 @@
    "prize": 600,
    "labels": {
     "prize_is_not_cash": false,
-    "students_only": false
+    "students_only": false,
+    "team_required": false,
+    "demo_video_required": false
    },
    "evidence": {
     "disclaimer_hits": 0,
-    "eligibility_card": "Above legal age of majority in country of residence Only specific countries/territories included View full rules View schedule Mar 29 – 31, 2025 Edmonton Unlimi"
+    "eligibility_card": "Above legal age of majority in country of residence Only specific countries/territories included View full rules View schedule Mar 29 – 31, 2025 Edmonton Unlimi",
+    "what_to_submit": "Requirements Female , Non-Binary or Two-Spirit developer or tech enthusiast. Located in Edmonton and the Metro Area. What to Build Hack the Bias : Develop tech solutions that shatter gender stereotypes and empower young women to pursue any ",
+    "eligibility_card_seen": true
    }
   },
   {
@@ -425,11 +553,15 @@
    "prize": 91565,
    "labels": {
     "prize_is_not_cash": false,
-    "students_only": true
+    "students_only": true,
+    "team_required": false,
+    "demo_video_required": false
    },
    "evidence": {
     "disclaimer_hits": 0,
-    "eligibility_card": "Above legal age of majority in country of residence Students only Companies/professional organizations excluded from participation All countries/territories, ex"
+    "eligibility_card": "Above legal age of majority in country of residence Students only Companies/professional organizations excluded from participation All countries/territories, ex",
+    "what_to_submit": "Requirements Build a project that addresses a real-world problem or contributes positive social impact. Your project can take any form — a web application, mobile app, AI tool, game, productivity tool, or any innovative idea that makes a di",
+    "eligibility_card_seen": true
    }
   },
   {
@@ -438,11 +570,15 @@
    "prize": 37100,
    "labels": {
     "prize_is_not_cash": false,
-    "students_only": false
+    "students_only": false,
+    "team_required": false,
+    "demo_video_required": true
    },
    "evidence": {
     "disclaimer_hits": 0,
-    "eligibility_card": "Above legal age of majority in country of residence All countries/territories, excluding standard exceptions View full rules View schedule Jan 16 – 18, 2026 Onl"
+    "eligibility_card": "Above legal age of majority in country of residence All countries/territories, excluding standard exceptions View full rules View schedule Jan 16 – 18, 2026 Onl",
+    "what_to_submit": "Requirements Requirements What to Submit Public Github/Alternative Repository Demo Video of your Project (2-5 mins) Written Explanation of your Project (Done via Devpost) Optional (However helpful): Link to Live Demo of your Project Other C",
+    "eligibility_card_seen": true
    }
   },
   {
@@ -451,11 +587,15 @@
    "prize": 14000,
    "labels": {
     "prize_is_not_cash": false,
-    "students_only": true
+    "students_only": true,
+    "team_required": false,
+    "demo_video_required": false
    },
    "evidence": {
     "disclaimer_hits": 0,
-    "eligibility_card": "Above legal age of majority in country of residence Students only All countries/territories, excluding standard exceptions View full rules View schedule May 21 "
+    "eligibility_card": "Above legal age of majority in country of residence Students only All countries/territories, excluding standard exceptions View full rules View schedule May 21 ",
+    "what_to_submit": "Requirements To participate in Med Hack, hackers are required to build innovative solutions addressing medical challenges. Submissions should include a detailed description of the problem being addressed, the solution developed, and any rel",
+    "eligibility_card_seen": true
    }
   },
   {
@@ -464,11 +604,15 @@
    "prize": 50000,
    "labels": {
     "prize_is_not_cash": false,
-    "students_only": false
+    "students_only": false,
+    "team_required": false,
+    "demo_video_required": false
    },
    "evidence": {
     "disclaimer_hits": 0,
-    "eligibility_card": "Above legal age of majority in country of residence All countries/territories, excluding standard exceptions View full rules View schedule Nov 7 – Dec 12, 2022 "
+    "eligibility_card": "Above legal age of majority in country of residence All countries/territories, excluding standard exceptions View full rules View schedule Nov 7 – Dec 12, 2022 ",
+    "what_to_submit": "Requirements What to Build: Build Functional NFTs that span across a full range of use cases. Functional = programmability What to Submit: Provide a URL to your code repository for judging and testing. We prefer public, open-source repos. I",
+    "eligibility_card_seen": true
    }
   },
   {
@@ -477,11 +621,15 @@
    "prize": 188960,
    "labels": {
     "prize_is_not_cash": false,
-    "students_only": true
+    "students_only": true,
+    "team_required": true,
+    "demo_video_required": false
    },
    "evidence": {
     "disclaimer_hits": 0,
-    "eligibility_card": "Ages 18+ only College students only Team required All countries/territories, excluding standard exceptions View full rules View schedule Oct 19 – 20, 2024 City "
+    "eligibility_card": "Ages 18+ only College students only Team required All countries/territories, excluding standard exceptions View full rules View schedule Oct 19 – 20, 2024 City ",
+    "what_to_submit": "Requirements Submit your hack by 10/20 10:30 AM PDT and make sure to add your teammates! You'll have until 11:30 AM to continue hacking and editing your submission, but the project must be submitted by 10:30 AM . Include an image of your pr",
+    "eligibility_card_seen": true
    }
   },
   {
@@ -490,11 +638,15 @@
    "prize": 19000,
    "labels": {
     "prize_is_not_cash": false,
-    "students_only": false
+    "students_only": false,
+    "team_required": false,
+    "demo_video_required": false
    },
    "evidence": {
     "disclaimer_hits": 0,
-    "eligibility_card": "Above legal age of majority in country of residence All countries/territories, excluding standard exceptions View full rules View schedule Sep 18 – Nov 1, 2023 "
+    "eligibility_card": "Above legal age of majority in country of residence All countries/territories, excluding standard exceptions View full rules View schedule Sep 18 – Nov 1, 2023 ",
+    "what_to_submit": "Requirements WHAT TO BUILD Entrants must create a working prototype or application using Ably’s realtime capabilities as outlined in the at least one of the following categories: Realtime Dashboards Build a new realtime application that use",
+    "eligibility_card_seen": true
    }
   },
   {
@@ -503,11 +655,15 @@
    "prize": 1500,
    "labels": {
     "prize_is_not_cash": false,
-    "students_only": false
+    "students_only": false,
+    "team_required": false,
+    "demo_video_required": false
    },
    "evidence": {
     "disclaimer_hits": 0,
-    "eligibility_card": ""
+    "eligibility_card": "",
+    "what_to_submit": "Requirements All participants and submissions must abide by the Major League Hacking (MLH) Code of Conduct . Hackathon Sponsors HOSTED BY SPONSORED BY ",
+    "eligibility_card_seen": false
    }
   },
   {
@@ -516,11 +672,15 @@
    "prize": 100000,
    "labels": {
     "prize_is_not_cash": false,
-    "students_only": false
+    "students_only": false,
+    "team_required": true,
+    "demo_video_required": false
    },
    "evidence": {
     "disclaimer_hits": 0,
-    "eligibility_card": "Above legal age of majority in country of residence Team required: 2 to 5 members All countries/territories, excluding standard exceptions View full rules View "
+    "eligibility_card": "Above legal age of majority in country of residence Team required: 2 to 5 members All countries/territories, excluding standard exceptions View full rules View ",
+    "what_to_submit": "Requirements AI in Healthcare and Agriculture Innovations in medical technology, patient care, smart farming, and sustainable food production What to Build Participants should develop AI-driven solutions that improve healthcare services or ",
+    "eligibility_card_seen": true
    }
   }
  ]

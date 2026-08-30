@@ -561,5 +561,47 @@ class AdvancementCost(unittest.TestCase):
             "The cafeteria serves lunch between eleven and two"))
 
 
+
+
+class VideoRequired(unittest.TestCase):
+    """The plainest wording there is, and the family above missed all of it.
+
+    `third party publication required` needs a platform named or the words
+    `uploaded publicly`. Measured against ground truth on 22 pages, that rule
+    caught four of the pages that ask for a video. So this family was added at
+    one severity lower, because a page alone cannot tell you whether the place
+    hosts video, only that many do not.
+
+    The negatives matter here. A page that merely SHOWS a video must not be
+    read as a page that REQUIRES one from you.
+    """
+
+    def setUp(self):
+        import re
+        from asterisk.restrictions import RESTRICTIONS
+        self.re = re
+        self.pat = dict((n, p) for n, p, _, _ in RESTRICTIONS)["video required"]
+
+    def _fires(self, txt):
+        return bool(self.re.search(self.pat, txt, self.re.I))
+
+    def test_the_bare_wording_fires(self):
+        self.assertTrue(self._fires(
+            "What to Submit A 2 minute demo video showcasing your project"))
+
+    def test_the_reversed_wording_fires(self):
+        self.assertTrue(self._fires(
+            "Each team must provide a video demo of up to three minutes"))
+
+    def test_a_duration_alone_fires(self):
+        self.assertTrue(self._fires("A 3 minute video explaining your idea"))
+
+    def test_a_video_the_page_shows_you_is_not_a_video_it_asks_for(self):
+        self.assertFalse(self._fires("Watch the promotional video on our home page"))
+
+    def test_the_absurd_witness_stays_silent(self):
+        self.assertFalse(self._fires("The cafeteria serves lunch between eleven and two"))
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
