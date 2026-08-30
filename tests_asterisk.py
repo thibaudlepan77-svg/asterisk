@@ -188,5 +188,23 @@ class Watching(unittest.TestCase):
         self.assertIn("Nothing changed", self.watch.render(d))
 
 
+class TableNoise(unittest.TestCase):
+    """A pricing grid is not a clause, and the model kept quoting grids."""
+
+    def test_a_price_grid_is_rejected(self):
+        from asterisk.audit import _is_table
+        self.assertTrue(_is_table("Pay monthly $27 USD/mo $72 USD/mo $399 USD/mo "
+                                  "Pay yearly $24 USD/mo $65 USD/mo $359 USD/mo"))
+
+    def test_a_real_clause_survives_even_with_numbers(self):
+        from asterisk.audit import _is_table
+        self.assertFalse(_is_table("A fee of 2% (or minimum fee 1 pound) applies per "
+                                   "transaction after your rolling monthly limit."))
+
+    def test_prose_without_numbers_survives(self):
+        from asterisk.audit import _is_table
+        self.assertFalse(_is_table("Entry is reserved to students currently enrolled."))
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)

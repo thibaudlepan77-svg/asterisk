@@ -18,6 +18,24 @@ does, set by two environment variables. It was developed and measured against
 an OpenAI compatible endpoint serving `openai/gpt-oss-120b`, and that is the
 configuration the numbers below come from. Nothing in the code knows a vendor.
 
+### Thirty seconds
+
+```bash
+git clone https://github.com/thibaudlepan77-svg/asterisk && cd asterisk
+python cli.py --offline https://gibc-v2.devpost.com/     # no key, no install
+python tests_asterisk.py                                 # 23 tests
+python eval/run_eval.py --offline                        # the numbers, rerun
+```
+
+[Why it exists](#why-it-exists) ·
+[On a real page](#what-it-does-on-a-real-page) ·
+[How it works](#how-it-works) ·
+[Results](#results) ·
+[The agent](#the-agent-and-the-failure-that-shaped-it) ·
+[Watching](#watching-because-an-offer-is-a-moving-thing) ·
+[Install](#install-and-run) ·
+[What it does not do](#what-it-does-not-do-stated-plainly)
+
 ---
 
 ## Why it exists
@@ -400,7 +418,7 @@ eval/                     labelled pages, scorer, held out set builder
 demo/app.py               a small Gradio front end, see demo/README.md
 cli.py                    one page, deterministic entry point
 agent.py                  multi page agent on the Strands Agents SDK
-tests_asterisk.py         regression and witness tests, 20 of them
+tests_asterisk.py         regression and witness tests, 23 of them
 docs/architecture.svg     the diagram above, source
 video/make_video.py       builds the demo video from slides and a synthetic voice
 ```

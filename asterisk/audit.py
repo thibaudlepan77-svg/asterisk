@@ -182,6 +182,21 @@ OTHER PASSAGES FROM THE SAME PAGE:
 """
 
 
+# A price table is not a clause. Measured on six live pages, the model layer
+# doubles the number of findings, and a good share of what it adds is a pricing
+# grid quoted back against a price claim. That is not a contradiction, it is a
+# table. A counter has to read like a sentence before it can cancel a promise.
+def _is_table(text: str) -> bool:
+    words = re.findall(r"[A-Za-z]{2,}", text)
+    if not words:
+        return True
+    digits = sum(ch.isdigit() for ch in text)
+    verbs = re.search(r"(is|are|was|were|will|shall|may|must|can|cannot|applies|apply|"
+                      r"charged|renews?|excluded?|requires?|includes?|means|does|do|"
+                      r"subject|entitled|reserved|available)", text, re.I)
+    return (digits / max(1, len(text)) > 0.10) and not verbs
+
+
 def by_model(doc, claims, sents, model=None, max_claims: int = 12, verbose: bool = False):
     out = []
     for c in claims[:max_claims]:
@@ -204,6 +219,10 @@ def by_model(doc, claims, sents, model=None, max_claims: int = 12, verbose: bool
             if not quote or not doc.contains(quote):
                 if verbose and quote:
                     print("  dropped ungrounded quote, %r" % quote[:70])
+                continue
+            if _is_table(quote):
+                if verbose:
+                    print("  dropped, reads as a table and not a clause, %r" % quote[:70])
                 continue
             out.append(Finding(
                 claim_kind=c.kind, claim=c.context or c.text, counter=quote,
