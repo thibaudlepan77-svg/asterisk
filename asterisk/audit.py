@@ -37,7 +37,7 @@ HARD_RULES = [
     # "billed monthly" alone was dropped. On a pricing page it is a toggle
     # label, not a disclosure, and it fired on a page that discloses nothing.
     ("free", r"(after (?:the|your) (?:free )?trial|auto[- ]?renew(?:s|al)?|will be charged|"
-             r"then \$?\d[\d,.]* ?(?:per|/|a ) ?(?:month|year|mo|yr)|"
+             r"then \$?\d[\d,.]* ?(?:per|/|a ) ?(?:month|year|mo\b|yr\b)|"
              r"payment method (?:is )?required|then switch to standard|"
              r"billed (?:monthly|annually) (?:at|from) )",
      "high", "Free is announced and a charge is described elsewhere."),
@@ -186,15 +186,28 @@ OTHER PASSAGES FROM THE SAME PAGE:
 # doubles the number of findings, and a good share of what it adds is a pricing
 # grid quoted back against a price claim. That is not a contradiction, it is a
 # table. A counter has to read like a sentence before it can cancel a promise.
+PRIX = re.compile(r"[$€£₹]\s?\d[\d,.]*|\d[\d,.]*\s?(?:USD|EUR|GBP)\b")
+CLAUSE = re.compile(r"\b(is|are|was|were|will|shall|may|must|can|cannot|applies|apply|"
+                    r"charged|renews?|excluded?|requires?|includes?|means|does|do|"
+                    r"subject|entitled|reserved|available|only|unless|after|before|"
+                    r"provided that|except)\b", re.I)
+
+
 def _is_table(text: str) -> bool:
-    words = re.findall(r"[A-Za-z]{2,}", text)
-    if not words:
+    """A price grid is not a clause.
+
+    Two signals, and the second is the one that actually works. A sentence with
+    three or more separate monetary amounts in it is a pricing table that lost
+    its columns on the way through the parser, whatever else it contains. The
+    digit density test alone let those through, because a grid also carries
+    plenty of words.
+    """
+    if not re.search(r"[A-Za-z]{2,}", text):
+        return True
+    if len(PRIX.findall(text)) >= 3:
         return True
     digits = sum(ch.isdigit() for ch in text)
-    verbs = re.search(r"(is|are|was|were|will|shall|may|must|can|cannot|applies|apply|"
-                      r"charged|renews?|excluded?|requires?|includes?|means|does|do|"
-                      r"subject|entitled|reserved|available)", text, re.I)
-    return (digits / max(1, len(text)) > 0.10) and not verbs
+    return digits / max(1, len(text)) > 0.10 and not CLAUSE.search(text)
 
 
 def by_model(doc, claims, sents, model=None, max_claims: int = 12, verbose: bool = False):

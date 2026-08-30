@@ -205,6 +205,19 @@ class TableNoise(unittest.TestCase):
         from asterisk.audit import _is_table
         self.assertFalse(_is_table("Entry is reserved to students currently enrolled."))
 
+    def test_three_prices_in_one_sentence_is_a_grid(self):
+        """The case the digit density test let through, because a grid has words too."""
+        from asterisk.audit import _is_table
+        self.assertTrue(_is_table("Pay monthly $27 USD/mo Pay yearly $24 USD/mo Core features "
+                                  "Earn 1% back on all sales Up to $4,500 USD"))
+        self.assertTrue(_is_table("Standard Free Standard Plus 3.99 GBP/month Plus Premium "
+                                  "7.99 GBP/month Premium Metal 14.99 GBP/month"))
+
+    def test_one_price_in_a_real_clause_survives(self):
+        from asterisk.audit import _is_table
+        self.assertFalse(_is_table("Try 3 months of Premium Individual for $0, "
+                                   "then $12.99/month."))
+
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)
