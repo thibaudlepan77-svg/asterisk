@@ -288,5 +288,34 @@ class Service(unittest.TestCase):
         self.assertIn("30 %", out)
 
 
+class OwnershipVersusLicence(unittest.TestCase):
+    """You keep the title, they take a licence that does everything a title does.
+
+    Added after a miss on a real contest rulebook, which the tool called clean.
+    """
+
+    PAGE = ("<h1>Rules</h1>"
+            "<p>Teams retain full ownership of original code, AI models, and application "
+            "designs.</p>"
+            "<p>By participating, each team grants the sponsor a perpetual, irrevocable, "
+            "worldwide, royalty-free, and unlimited license to use, reproduce, modify, "
+            "adapt, distribute, sub-license, and create derivative works from any data "
+            "submitted in connection with the competition.</p>")
+
+    def test_the_pair_is_caught(self):
+        doc = segment(self.PAGE, "test")
+        claims, findings = audit(doc, offline=True)
+        self.assertTrue(any(c.kind == "ownership" for c in claims),
+                        "the promise that you keep your rights must be picked up")
+        own = [f for f in findings if f.claim_kind == "ownership"]
+        self.assertTrue(own, "a perpetual unlimited licence must answer that promise")
+        self.assertIn("perpetual", own[0].counter.lower())
+
+    def test_ownership_alone_raises_nothing(self):
+        doc = segment("<h1>Rules</h1><p>Teams retain full ownership of their code.</p>", "test")
+        _, findings = audit(doc, offline=True)
+        self.assertEqual([f for f in findings if f.claim_kind == "ownership"], [])
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)

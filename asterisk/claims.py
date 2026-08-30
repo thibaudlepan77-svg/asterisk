@@ -26,6 +26,15 @@ PATTERNS: list[tuple[str, str, str]] = [
     ("instant",     r"\binstant(?:ly)?\b|\bimmediate(?:ly)?\b|\bsame[- ]day\b|\bright away\b", "no delay is implied"),
     ("lifetime",    r"\blifetime\b|\bforever\b|\bone[- ]time payment\b|\bnever expires?\b", "no expiry is implied"),
     ("cancel",      r"\bcancel any ?time\b|\bno commitment\b|\bno contract\b", "no lock in is implied"),
+    # Added after a miss. On a contest rulebook, "applicants retain ownership of
+    # original intellectual property" sat a paragraph away from a perpetual,
+    # irrevocable, unlimited licence over everything submitted, and the tool
+    # reported the page as clean.
+    ("ownership",   r"\b(?:you|applicants?|teams?|participants?|entrants?|competitors?)\s+"
+                    r"(?:retain|keep|own)s?\b[^.]{0,50}?\b(?:ownership|rights?|intellectual property)\b"
+                    r"|\byou (?:own|keep) (?:your|all)\b|\bremains? yours\b"
+                    r"|\bwe do not claim (?:any )?(?:ownership|rights)\b",
+     "you are told you keep what you make"),
 ]
 
 _COMPILED = [(k, re.compile(p, re.I), w) for k, p, w in PATTERNS]

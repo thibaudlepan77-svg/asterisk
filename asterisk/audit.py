@@ -66,6 +66,14 @@ HARD_RULES = [
     ("guarantee", r"(does not (?:apply|cover)|excludes|at (?:our|its) (?:sole )?discretion|"
                   r"no (?:warranty|guarantee) of|as is)",
      "medium", "A guarantee is announced and carved out elsewhere."),
+    # You keep the title, they take a licence that does everything a title does.
+    # Found by hand on a contest rulebook the tool had reported as clean.
+    ("ownership", r"(perpetual[^.]{0,60}licen[cs]e|irrevocable[^.]{0,60}licen[cs]e|"
+                  r"licen[cs]e[^.]{0,80}(?:perpetual|irrevocable|unlimited)|"
+                  r"royalty[- ]free[^.]{0,60}(?:sub-?licen[cs]e|derivative works)|"
+                  r"grants? [^.]{0,40}(?:unlimited|worldwide)[^.]{0,60}licen[cs]e|"
+                  r"assigns? all right)",
+     "high", "You are told you keep ownership and you grant a licence that does the same work."),
 ]
 
 _HARD = [(k, re.compile(p, re.I), sev, why) for k, p, sev, why in HARD_RULES]

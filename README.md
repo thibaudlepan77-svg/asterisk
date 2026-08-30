@@ -23,7 +23,7 @@ configuration the numbers below come from. Nothing in the code knows a vendor.
 ```bash
 git clone https://github.com/thibaudlepan77-svg/asterisk && cd asterisk
 python cli.py --offline https://gibc-v2.devpost.com/     # no key, no install
-python tests_asterisk.py                                 # 34 tests
+python tests_asterisk.py                                 # 36 tests
 python eval/run_eval.py --offline                        # the numbers, rerun
 ```
 
@@ -258,6 +258,30 @@ Nothing on the pricing page suggests that the advertised commission is not the
 only deduction. **This is the measurement that justifies the agent existing at
 all.** A one page auditor answers "nothing found" on all six, which is true and
 useless.
+
+### The miss that added a rule, on the day of writing
+
+The tool was pointed at a contest rulebook and reported it clean. Read by hand,
+that page says
+
+> Teams retain full ownership of original code, AI models, and application
+> designs.
+
+one paragraph away from
+
+> each team grants [the sponsor] a perpetual, irrevocable, worldwide,
+> royalty-free, and unlimited license to use, reproduce, modify, adapt,
+> distribute, sub-license, and create derivative works from any data or
+> datasets submitted
+
+You keep the title. They take a licence that does everything a title does. No
+claim kind covered that, so `ownership` was added, with two witness tests, and
+the contest benchmark is unchanged.
+
+Two things worth noticing about that case. The pair sits **1 % of the page
+apart**, so proximity is not visibility, a long document hides things by length
+rather than by distance. And a miss on a real page is the only reliable source
+of a new rule, because nobody guesses this shape in the abstract.
 
 ### What the model layer actually adds
 
@@ -509,7 +533,7 @@ eval/                     labelled pages, scorer, held out set builder
 demo/app.py               a small Gradio front end, see demo/README.md
 cli.py                    one page, deterministic entry point
 agent.py                  multi page agent on the Strands Agents SDK
-tests_asterisk.py         regression and witness tests, 34 of them
+tests_asterisk.py         regression and witness tests, 36 of them
 docs/architecture.svg     the diagram above, source
 video/make_video.py       builds the demo video from slides and a synthetic voice
 ```
